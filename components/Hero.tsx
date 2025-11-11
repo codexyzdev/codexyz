@@ -35,6 +35,7 @@ export default function Hero({ lang, onToggleLang, onScrollToTech }: HeroProps) 
               aria-label="Toggle language"
               className="px-3 py-1 text-sm rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800"
               onClick={onToggleLang}
+              type="button"
             >
               {t.langToggle}
             </button>
@@ -45,6 +46,7 @@ export default function Hero({ lang, onToggleLang, onScrollToTech }: HeroProps) 
             <button
               className="px-4 py-2 rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 hover:opacity-90 transition"
               onClick={onScrollToTech}
+              type="button"
             >
               {t.seeTech}
             </button>
