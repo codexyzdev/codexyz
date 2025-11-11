@@ -84,6 +84,8 @@
   --degradado-codexyz: linear-gradient(135deg, var(--color-azul) 0%, var(--color-teal) 70%, var(--color-gris) 100%);
 }
 
+
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

@@ -186,6 +186,10 @@ export default function Home() {
   const [lang, setLang] = useState<"en" | "es">("en")
   const [theme, setTheme] = useState<"light" | "dark">("light")
   const [selectedTech, setSelectedTech] = useState<TechItem | null>(null)
+  const [selectedProject, setSelectedProject] = useState<{
+    name: string
+    src: string
+  } | null>(null)
 
   const texts = {
     en: {
@@ -201,6 +205,8 @@ export default function Home() {
       aboutMe: "About me",
       aboutDesc:
         "I am passionate about building modern and functional applications. I work with Next.js, React and Supabase. Always learning and improving to deliver efficient solutions.",
+      projects: "Projects",
+      projectsDesc: "A few apps I have worked on.",
       contact: "Contact",
       contactDesc:
         "Fill the form and your device's mail client (Gmail on mobile) will open with the message ready to send.",
@@ -226,6 +232,8 @@ export default function Home() {
       aboutMe: "Sobre mí",
       aboutDesc:
         "Soy apasionado por crear aplicaciones modernas y funcionales. Trabajo con Next.js, React y Supabase. Siempre aprendiendo y mejorando para ofrecer soluciones eficientes.",
+      projects: "Proyectos",
+      projectsDesc: "Algunas apps en las que he trabajado.",
       contact: "Contacto",
       contactDesc:
         "Completa el formulario y se abrirá tu cliente de correo (Gmail en móvil) con el mensaje listo para enviar.",
@@ -288,6 +296,7 @@ export default function Home() {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setSelectedTech(null)
+        setSelectedProject(null)
       }
     }
     window.addEventListener("keydown", onKeyDown)
@@ -362,7 +371,7 @@ export default function Home() {
               </Button>
               <Button
                 variant="outline"
-                className="w-full sm:w-auto h-11 rounded-full border-white/30 text-white hover:bg-white/10"
+                className="w-full sm:w-auto h-11 rounded-full border transition-colors shadow-sm bg-neutral-900 text-white border-neutral-900 hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:border-white/60 dark:hover:bg-white/90"
                 onClick={() => {
                   const section = document.getElementById("tecnologias")
                   section?.scrollIntoView({ behavior: "smooth" })
@@ -435,6 +444,100 @@ export default function Home() {
               <div className="mt-6 flex justify-end">
                 <Button onClick={() => setSelectedTech(null)}>{lang === "en" ? "Close" : "Cerrar"}</Button>
               </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* Proyectos */}
+      <section id="proyectos" className="mx-auto max-w-screen-lg px-4 sm:px-6 lg:px-8 py-14 md:py-18">
+        <h2 className="text-2xl font-semibold">{texts[lang].projects}</h2>
+        <p className="mt-2 text-muted-foreground">{texts[lang].projectsDesc}</p>
+
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {/* Los Tiburones */}
+          <a
+            href="#"
+            aria-label="Los Tiburones"
+            className="group block overflow-hidden rounded-xl border border-input/60 bg-card/80 backdrop-blur-sm shadow-sm transition hover:shadow-md"
+            onClick={(e) => {
+              e.preventDefault()
+              setSelectedProject({ name: "Los Tiburones", src: "/los-tiburones.png" })
+            }}
+          >
+            <div className="relative w-full h-64 sm:h-72 md:h-80 bg-muted">
+              <Image src="/los-tiburones.png" alt="Los Tiburones - Login" fill className="object-cover" />
+            </div>
+            <div className="p-3 flex items-center justify-between text-sm">
+              <span className="font-medium">Los Tiburones</span>
+              <span className="text-muted-foreground group-hover:underline">{lang === "en" ? "View" : "Ver"}</span>
+            </div>
+          </a>
+
+          {/* Financiamientos */}
+          <a
+            href="#"
+            aria-label="Financiamientos"
+            className="group block overflow-hidden rounded-xl border border-input/60 bg-card/80 backdrop-blur-sm shadow-sm transition hover:shadow-md"
+            onClick={(e) => {
+              e.preventDefault()
+              setSelectedProject({ name: "Financiamientos", src: "/financiamientos.png" })
+            }}
+          >
+            <div className="relative w-full h-64 sm:h-72 md:h-80 bg-muted">
+              <Image src="/financiamientos.png" alt="Financiamientos - Login" fill className="object-cover" />
+            </div>
+            <div className="p-3 flex items-center justify-between text-sm">
+              <span className="font-medium">Financiamientos</span>
+              <span className="text-muted-foreground group-hover:underline">{lang === "en" ? "View" : "Ver"}</span>
+            </div>
+          </a>
+
+          {/* Chess Clock */}
+          <a
+            href="https://chess-clock-by-codexyzdev.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chess Clock"
+            className="group block overflow-hidden rounded-xl border border-input/60 bg-card/80 backdrop-blur-sm shadow-sm transition hover:shadow-md"
+          >
+            <div className="relative w-full h-64 sm:h-72 md:h-80 bg-muted">
+              <Image src="/chess-clock.png" alt="Chess Clock - App" fill className="object-cover" />
+            </div>
+            <div className="p-3 flex items-center justify-between text-sm">
+              <span className="font-medium">Chess Clock</span>
+              <span className="text-muted-foreground group-hover:underline">{lang === "en" ? "View" : "Ver"}</span>
+            </div>
+          </a>
+        </div>
+
+        {/* Modal de proyecto: muestra la imagen completa */}
+        {selectedProject && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+            onClick={() => setSelectedProject(null)}
+          >
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Vista completa de ${selectedProject.name}`}
+              className="relative w-full max-w-5xl h-[75vh] sm:h-[80vh] bg-black rounded-xl overflow-hidden ring-1 ring-white/20"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={selectedProject.src}
+                alt={`${selectedProject.name} - imagen completa`}
+                fill
+                sizes="100vw"
+                className="object-contain"
+                priority
+              />
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-3 right-3 rounded-md bg-white/80 text-black px-3 py-1 text-sm hover:bg-white"
+              >
+                {lang === "en" ? "Close" : "Cerrar"}
+              </button>
             </div>
           </div>
         )}
