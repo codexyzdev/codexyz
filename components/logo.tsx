@@ -1,5 +1,52 @@
-import * as React from "react";
-const SVGComponent = (props: React.SVGProps<SVGSVGElement>) => (
+"use client"
+import * as React from "react"
+import { animate, createTimeline, stagger } from "animejs"
+
+const SVGComponent = (props: React.SVGProps<SVGSVGElement>) => {
+  const ref = React.useRef<SVGSVGElement>(null)
+  React.useEffect(() => {
+    const svg = ref.current
+    if (!svg) return
+    const reduce = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduce) return
+    const letters = svg.querySelectorAll("path:not([style*='fill:'])")
+    const circuits = svg.querySelectorAll("path[style*='fill:#fff'], path[style*='fill: #fff']")
+    const accents = svg.querySelectorAll("path[style*='#0adcbf'], path[style*='#0844c6']")
+    const tl = createTimeline()
+    tl.add(circuits, { opacity: [0, 1], duration: 700, ease: "easeOutQuad", delay: stagger(40) })
+      .add(accents, { opacity: [0, 1], duration: 600, ease: "easeOutQuad", delay: stagger(50) }, "-=300")
+
+    const ns = "http://www.w3.org/2000/svg"
+    const group = document.createElementNS(ns, "g")
+    letters.forEach(l => group.appendChild(l))
+    svg.appendChild(group)
+    const bbox = group.getBBox()
+    let defs = svg.querySelector("defs") as SVGDefsElement | null
+    if (!defs) {
+      defs = document.createElementNS(ns, "defs") as SVGDefsElement
+      svg.insertBefore(defs, svg.firstChild)
+    }
+    const clip = document.createElementNS(ns, "clipPath")
+    clip.setAttribute("id", "letters-clip")
+    const rect = document.createElementNS(ns, "rect")
+    rect.setAttribute("x", String(bbox.x))
+    rect.setAttribute("y", String(bbox.y))
+    rect.setAttribute("width", "0")
+    rect.setAttribute("height", String(bbox.height))
+    clip.appendChild(rect)
+    defs.appendChild(clip)
+    group.setAttribute("clip-path", "url(#letters-clip)")
+    animate(rect, { width: [0, bbox.width], duration: 1200, ease: "easeInOutQuad" })
+
+    const loop = () => {
+      animate(accents, { opacity: [1, 0.85], duration: 2000, direction: "alternate", ease: "easeInOutSine" })
+      animate(circuits, { opacity: [1, 0.92], duration: 2000, direction: "alternate", ease: "easeInOutSine" })
+    }
+    const interval = setInterval(loop, 4000)
+    setTimeout(loop, 1500)
+    return () => clearInterval(interval)
+  }, [])
+  return (
   <svg
     width="100%"
     height="100%"
@@ -14,6 +61,7 @@ const SVGComponent = (props: React.SVGProps<SVGSVGElement>) => (
       strokeLinejoin: "round",
       strokeMiterlimit: 2,
     }}
+    ref={ref}
     {...props}
   >
     <path
@@ -273,5 +321,6 @@ const SVGComponent = (props: React.SVGProps<SVGSVGElement>) => (
       </linearGradient>
     </defs>
   </svg>
-);
-export default SVGComponent;
+  )
+}
+export default SVGComponent
