@@ -31,7 +31,7 @@ export default function AppHero({
               <Logo
                 width={180}
                 height={58}
-                className="h-8 w-auto"
+                className="h-8 w-auto text-black dark:text-white"
                 aria-label="Codexyz.dev logo"
               />
             </div>
