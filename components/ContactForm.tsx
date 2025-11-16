@@ -17,13 +17,16 @@ export default function ContactForm({ lang, id }: ContactFormProps) {
     const email = (fd.get("email")?.toString() ?? "").trim()
     const message = (fd.get("message")?.toString() ?? "").trim()
 
-    const subject = `${lang === "en" ? "Nueva consulta" : "Nueva consulta"} — ${name}`
+    const subject = `${lang === "en" ? "New inquiry" : "Nueva consulta"} — ${name}`
     const bodyText = (
       lang === "en"
-        ? `👋 Hi Alejandro,%0A%0AYou have a new inquiry from the portfolio.%0A%0A— Contact details —%0A• Name: ${name}%0A• Email: ${email}%0A%0A— Message —%0A${message}%0A%0A—%0ASent from Codexyz.dev`
-        : `👋 Hola Alejandro,%0A%0ATienes una nueva consulta desde el portafolio.%0A%0A— Datos del contacto —%0A• Nombre: ${name}%0A• Email: ${email}%0A%0A— Mensaje —%0A${message}%0A%0A—%0AEnviado desde Codexyz.dev`
+        ? `👋 Hi Alejandro\n\nYou have a new inquiry from the portfolio.\n\n— Contact details —\n• Name: ${name}\n• Email: ${email}\n\n— Message —\n${message}\n\n—\nSent from Codexyz.dev`
+        : `👋 Hola Alejandro\n\nTienes una nueva consulta desde el portafolio.\n\n— Datos del contacto —\n• Nombre: ${name}\n• Email: ${email}\n\n— Mensaje —\n${message}\n\n—\nEnviado desde Codexyz.dev`
     )
-    const mailtoHref = `mailto:alejandrobaez938@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`
+    const params = new URLSearchParams()
+    params.set("subject", subject)
+    params.set("body", bodyText)
+    const mailtoHref = `mailto:alejandrobaez938@gmail.com?${params.toString()}`
     window.location.href = mailtoHref
   }, [lang])
 
