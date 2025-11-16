@@ -1,5 +1,5 @@
 "use client"
-import Image from "next/image"
+import Logo from "@/components/logo"
 import { Button } from "@/components/ui/button"
 import { Sun, Moon, Mail, Grid3x3 } from "lucide-react"
 import { texts, Lang } from "@/lib/texts"
@@ -28,13 +28,11 @@ export default function AppHero({
         <div className="rounded-2xl bg-white/5 dark:bg-black/20 backdrop-blur-sm ring-1 ring-white/20 px-5 py-6 sm:px-8 sm:py-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="Codexyz.dev logo"
+              <Logo
                 width={180}
                 height={58}
                 className="h-8 w-auto"
-                priority
+                aria-label="Codexyz.dev logo"
               />
             </div>
             <div className="flex items-center gap-2">
