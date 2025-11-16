@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { IoLogoWhatsapp } from "react-icons/io";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -102,12 +103,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const waPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+584125146317";
+  const waText = encodeURIComponent("Hola Alejandro, vi tu portafolio y me gustaría hablar");
+  const waUrl = `https://wa.me/${waPhone}?text=${waText}`;
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <a
+          href={waUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contactar por WhatsApp"
+          className="fixed bottom-4 right-4 z-50 inline-flex items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg hover:bg-emerald-600 transition h-12 w-12"
+        >
+          <IoLogoWhatsapp size={24} />
+        </a>
       </body>
     </html>
   );

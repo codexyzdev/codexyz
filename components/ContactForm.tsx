@@ -17,9 +17,13 @@ export default function ContactForm({ lang, id }: ContactFormProps) {
     const email = (fd.get("email")?.toString() ?? "").trim()
     const message = (fd.get("message")?.toString() ?? "").trim()
 
-    const subject = `${lang === "en" ? "Portfolio contact" : "Contacto desde el portafolio"} — ${name}`
-    const body = `Nombre: ${name}%0AEmail: ${email}%0A%0AMensaje:%0A${message}`
-    const mailtoHref = `mailto:alejandrobaez938@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`
+    const subject = `${lang === "en" ? "Nueva consulta" : "Nueva consulta"} — ${name}`
+    const bodyText = (
+      lang === "en"
+        ? `👋 Hi Alejandro,%0A%0AYou have a new inquiry from the portfolio.%0A%0A— Contact details —%0A• Name: ${name}%0A• Email: ${email}%0A%0A— Message —%0A${message}%0A%0A—%0ASent from Codexyz.dev`
+        : `👋 Hola Alejandro,%0A%0ATienes una nueva consulta desde el portafolio.%0A%0A— Datos del contacto —%0A• Nombre: ${name}%0A• Email: ${email}%0A%0A— Mensaje —%0A${message}%0A%0A—%0AEnviado desde Codexyz.dev`
+    )
+    const mailtoHref = `mailto:alejandrobaez938@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`
     window.location.href = mailtoHref
   }, [lang])
 
