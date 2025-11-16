@@ -13,8 +13,8 @@ const SVGComponent = (props: React.SVGProps<SVGSVGElement>) => {
     const circuits = svg.querySelectorAll("path[style*='fill:#fff'], path[style*='fill: #fff']")
     const accents = svg.querySelectorAll("path[style*='#0adcbf'], path[style*='#0844c6']")
     const tl = createTimeline()
-    tl.add(circuits, { opacity: [0, 1], duration: 700, ease: "easeOutQuad", delay: stagger(40) })
-      .add(accents, { opacity: [0, 1], duration: 600, ease: "easeOutQuad", delay: stagger(50) }, "-=300")
+    tl.add(circuits, { opacity: [0, 1], duration: 1500, ease: "easeOutQuad", delay: stagger(40) })
+      .add(accents, { opacity: [0, 1], duration: 1000, ease: "easeOutQuad", delay: stagger(50)}, "-=500")
 
     const ns = "http://www.w3.org/2000/svg"
     const group = document.createElementNS(ns, "g")
@@ -36,10 +36,10 @@ const SVGComponent = (props: React.SVGProps<SVGSVGElement>) => {
     clip.appendChild(rect)
     defs.appendChild(clip)
     group.setAttribute("clip-path", "url(#letters-clip)")
-    animate(rect, { width: [0, bbox.width], duration: 1200, ease: "easeInOutQuad" })
+    animate(rect, { width: [0, bbox.width], duration: 1500, ease: "easeInOutQuad" })
 
     const loop = () => {
-      animate(accents, { opacity: [1, 0.85], duration: 2000, direction: "alternate", ease: "easeInOutSine" })
+      animate(accents, { opacity: [1, 0.85], duration: 3000, direction: "alternate", ease: "easeInOutSine" })
       animate(circuits, { opacity: [1, 0.92], duration: 2000, direction: "alternate", ease: "easeInOutSine" })
     }
     const interval = setInterval(loop, 4000)
