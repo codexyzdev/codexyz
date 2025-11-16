@@ -39,11 +39,13 @@ const SVGComponent = (props: React.SVGProps<SVGSVGElement>) => {
     animate(rect, { width: [0, bbox.width], duration: 1500, ease: "easeInOutQuad" })
 
     const loop = () => {
-      animate(accents, { opacity: [1, 0.85], duration: 3000, direction: "alternate", ease: "easeInOutSine" })
-      animate(circuits, { opacity: [1, 0.92], duration: 2000, direction: "alternate", ease: "easeInOutSine" })
+      const tl = createTimeline()
+    tl.add(circuits, { opacity: [0, 1], duration: 700, ease: "easeOutQuad", delay: stagger(40) })
+      .add(accents, { opacity: [0, 1], duration: 1000, ease: "easeOutQuad", delay: stagger(50)}, "-=500")
+
     }
-    const interval = setInterval(loop, 4000)
-    setTimeout(loop, 1500)
+    const interval = setInterval(loop, 5000)
+    setTimeout(loop, 3000)
     return () => clearInterval(interval)
   }, [])
   return (
