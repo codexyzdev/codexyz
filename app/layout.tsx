@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://codexyz.dev"),
   title: {
     default: "Codexyz.dev — Alejandro Baez",
     template: "%s | Codexyz.dev",
