@@ -84,60 +84,55 @@ export default function ContactForm({ lang, id }: ContactFormProps) {
       return
     }
 
-    const subject = `${lang === "en" ? "💼 New Contact from Portfolio" : "💼 Nuevo Contacto desde Portafolio"} - ${name}`
+    const subject = `${lang === "en" ? "💼%20New%20Contact%20from%20Portfolio" : "💼%20Nuevo%20Contacto%20desde%20Portafolio"} - ${name}`
 
     const bodyText = (
       lang === "en"
-        ? `Hi Alejandro!
+        ? `Hi%20Alejandro!
 
-You have received a new contact inquiry through your portfolio.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 CONTACT INFORMATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-👤 Name:
-   ${name}
-
-📧 Email:
-   ${email}
+You%20have%20received%20a%20new%20contact%20inquiry%20through%20your%20portfolio.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💬 MESSAGE
+📋%20CONTACT%20INFORMATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤%20Name:%20${name}
+
+📧%20Email:%20${email}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬%20MESSAGE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${message}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🌐 Sent from: Codexyz.dev
-⏰ Remember to respond promptly!
+🌐%20Sent%20from:%20Codexyz.dev
 
 `
-        : `¡Hola Alejandro!
+        : `¡Hola%20Alejandro!
 
-Has recibido una nueva consulta de contacto a través de tu portafolio.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 INFORMACIÓN DE CONTACTO
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-👤 Nombre:
-   ${name}
-
-📧 Email:
-   ${email}
+Has%20recibido%20una%20nueva%20consulta%20de%20contacto%20a%20través%20de%20tu%20portafolio.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💬 MENSAJE
+📋%20INFORMACIÓN%20DE%20CONTACTO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤%20Nombre:%20${name}
+
+📧%20Email:%20${email}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬%20MESSAGE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${message}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🌐 Enviado desde: Codexyz.dev
-⏰ ¡Recuerda responder pronto!
+🌐%20Enviado%20desde:%20Codexyz.dev
+
 
 `
     )
@@ -169,8 +164,8 @@ ${message}
               name="name"
               type="text"
               className={`rounded-md border ${errors.name && touched.has("name")
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-neutral-300 dark:border-neutral-700"
+                ? "border-red-500 focus:ring-red-500"
+                : "border-neutral-300 dark:border-neutral-700"
                 } bg-white dark:bg-neutral-900 px-3 py-2 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0`}
               placeholder={lang === "en" ? "Your name" : "Tu nombre"}
               required
@@ -196,8 +191,8 @@ ${message}
               name="email"
               type="email"
               className={`rounded-md border ${errors.email && touched.has("email")
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-neutral-300 dark:border-neutral-700"
+                ? "border-red-500 focus:ring-red-500"
+                : "border-neutral-300 dark:border-neutral-700"
                 } bg-white dark:bg-neutral-900 px-3 py-2 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0`}
               placeholder={lang === "en" ? "youremail@gmail.com" : "tucorreo@gmail.com"}
               required
@@ -220,8 +215,8 @@ ${message}
                 {t.message} <span className="text-red-500" aria-hidden="true">*</span>
               </span>
               <span className={`text-xs ${messageLength > maxMessageLength
-                  ? "text-red-500"
-                  : "text-neutral-500 dark:text-neutral-400"
+                ? "text-red-500"
+                : "text-neutral-500 dark:text-neutral-400"
                 }`}>
                 {messageLength}/{maxMessageLength} {t.characterCount}
               </span>
@@ -230,8 +225,8 @@ ${message}
               id="message"
               name="message"
               className={`rounded-md border ${errors.message && touched.has("message")
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-neutral-300 dark:border-neutral-700"
+                ? "border-red-500 focus:ring-red-500"
+                : "border-neutral-300 dark:border-neutral-700"
                 } bg-white dark:bg-neutral-900 px-3 py-2 min-h-[140px] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0`}
               placeholder={lang === "en" ? "Tell me about your idea or project" : "Cuéntame sobre tu idea o proyecto"}
               required
