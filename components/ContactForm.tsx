@@ -84,12 +84,64 @@ export default function ContactForm({ lang, id }: ContactFormProps) {
       return
     }
 
-    const subject = `${lang === "en" ? "New inquiry" : "Nueva consulta"} — ${name}`
+    const subject = `${lang === "en" ? "💼 New Contact from Portfolio" : "💼 Nuevo Contacto desde Portafolio"} - ${name}`
+
     const bodyText = (
       lang === "en"
-        ? `👋 Hi Alejandro\n\nYou have a new inquiry from the portfolio.\n\n— Contact details —\n• Name: ${name}\n• Email: ${email}\n\n— Message —\n${message}\n\n—\nSent from Codexyz.dev`
-        : `👋 Hola Alejandro\n\nTienes una nueva consulta desde el portafolio.\n\n— Datos del contacto —\n• Nombre: ${name}\n• Email: ${email}\n\n— Mensaje —\n${message}\n\n—\nEnviado desde Codexyz.dev`
+        ? `Hi Alejandro!
+
+You have received a new contact inquiry through your portfolio.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 CONTACT INFORMATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 Name:
+   ${name}
+
+📧 Email:
+   ${email}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 MESSAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+${message}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 Sent from: Codexyz.dev
+⏰ Remember to respond promptly!
+
+`
+        : `¡Hola Alejandro!
+
+Has recibido una nueva consulta de contacto a través de tu portafolio.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 INFORMACIÓN DE CONTACTO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 Nombre:
+   ${name}
+
+📧 Email:
+   ${email}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 MENSAJE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+${message}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 Enviado desde: Codexyz.dev
+⏰ ¡Recuerda responder pronto!
+
+`
     )
+
     const params = new URLSearchParams()
     params.set("subject", subject)
     params.set("body", bodyText)
