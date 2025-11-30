@@ -6,6 +6,11 @@ export type ProjectItem = {
 
 export const projects: ProjectItem[] = [
   {
+    name: "DevPulse",
+    src: "/devpulse-seven.vercel.app.png",
+    href: "https://devpulse-seven.vercel.app/",
+  },
+  {
     name: "Los Tiburones",
     src: "/los-tiburones.png",
   },
