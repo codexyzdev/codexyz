@@ -64,6 +64,9 @@ export default function ContactForm({ lang, id }: ContactFormProps) {
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // LÓGICA MEJORADA DEL MENSAJE
+  // ---------------------------------------------------------------------------
   const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const fd = new FormData(e.currentTarget)
@@ -77,72 +80,57 @@ export default function ContactForm({ lang, id }: ContactFormProps) {
     newErrors.email = validateField("email", email)
     newErrors.message = validateField("message", message)
 
-    // If there are errors, show them and don't submit
     if (newErrors.name || newErrors.email || newErrors.message) {
       setErrors(newErrors)
       setTouched(new Set(["name", "email", "message"]))
       return
     }
 
-    const subject = `${lang === "en" ? "💼%20New%20Contact%20from%20Portfolio" : "💼%20Nuevo%20Contacto%20desde%20Portafolio"} - ${name}`
+    // 1. Asunto limpio y directo
+    const subject = lang === "en"
+      ? `💼 Portfolio Inquiry: ${name}`
+      : `💼 Contacto Portafolio: ${name}`
 
-    const bodyText = (
-      lang === "en"
-        ? `Hi%20Alejandro!
+    // 2. Construcción del cuerpo con Template Literals (sin %20 manuales)
+    const title = lang === "en" ? "NEW MESSAGE FROM PORTFOLIO" : "NUEVO MENSAJE DEL PORTAFOLIO"
+    const labelName = lang === "en" ? "Name" : "Nombre"
+    const labelEmail = lang === "en" ? "Email" : "Correo"
+    const labelMsg = lang === "en" ? "Message" : "Mensaje"
+    const footer = "Codexyz.dev"
 
-You%20have%20received%20a%20new%20contact%20inquiry%20through%20your%20portfolio.
+    // Usamos espacios reales y saltos de línea reales aquí.
+    // Se codificarán automáticamente después.
+    const bodyContent = `
+${lang === "en" ? "Hi Alejandro," : "¡Hola Alejandro!"}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋%20CONTACT%20INFORMATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${title}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-👤%20Name:%20${name}
+👤 ${labelName}:  ${name}
+📧 ${labelEmail}: ${email}
 
-📧%20Email:%20${email}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💬%20MESSAGE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-${message}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🌐%20Sent%20from:%20Codexyz.dev
-
-`
-        : `¡Hola%20Alejandro!
-
-Has%20recibido%20una%20nueva%20consulta%20de%20contacto%20a%20través%20de%20tu%20portafolio.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋%20INFORMACIÓN%20DE%20CONTACTO
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-👤%20Nombre:%20${name}
-
-📧%20Email:%20${email}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💬%20MESSAGE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 ${labelMsg}:
 
 ${message}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🌐%20Enviado%20desde:%20Codexyz.dev
-
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 ${footer}
 `
-    )
 
+    // 3. Codificación automática segura
+    // Usamos URLSearchParams para generar la query string válida.
     const params = new URLSearchParams()
     params.set("subject", subject)
-    params.set("body", bodyText)
-    const mailtoHref = `mailto:alejandrobaez938@gmail.com?${params.toString()}`
-    window.location.href = mailtoHref
+    params.set("body", bodyContent.trim())
+
+    // Nota: mailto a veces prefiere %20 sobre el símbolo + para espacios.
+    // .toString() genera '+' para espacios. Hacemos un replace final para máxima compatibilidad.
+    const queryString = params.toString().replace(/\+/g, "%20")
+
+    window.location.href = `mailto:alejandrobaez938@gmail.com?${queryString}`
   }, [lang, validateField])
+  // ---------------------------------------------------------------------------
 
   return (
     <section id={id} aria-labelledby="contact-title" className="mt-10">
