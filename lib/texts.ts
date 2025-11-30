@@ -25,6 +25,19 @@ export const texts = {
     message: "Message",
     sendGmail: "Send email",
     langToggle: "ES / EN",
+    // Form validation
+    required: "This field is required",
+    invalidEmail: "Please enter a valid email address",
+    messageTooShort: "Message must be at least 10 characters",
+    characterCount: "characters",
+    // Accessibility
+    skipToContent: "Skip to main content",
+    closeModal: "Close modal",
+    openInNewTab: "Opens in new tab",
+    previousProject: "Previous project",
+    nextProject: "Next project",
+    // Loading states
+    loading: "Loading...",
   },
   es: {
     portfolio: "Portafolio",
@@ -50,6 +63,19 @@ export const texts = {
     message: "Mensaje",
     sendGmail: "Enviar email",
     langToggle: "ES / EN",
+    // Form validation
+    required: "Este campo es obligatorio",
+    invalidEmail: "Por favor ingresa un email válido",
+    messageTooShort: "El mensaje debe tener al menos 10 caracteres",
+    characterCount: "caracteres",
+    // Accessibility
+    skipToContent: "Saltar al contenido principal",
+    closeModal: "Cerrar modal",
+    openInNewTab: "Abre en nueva pestaña",
+    previousProject: "Proyecto anterior",
+    nextProject: "Siguiente proyecto",
+    // Loading states
+    loading: "Cargando...",
   },
 } as const
 
