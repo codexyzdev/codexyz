@@ -51,18 +51,18 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: var(--color-azul);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --accent: color-mix(in oklch, var(--color-teal) 12%, white);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: color-mix(in oklch, var(--color-teal) 65%, white);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -70,18 +70,24 @@
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary: var(--color-azul);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-ring: color-mix(in oklch, var(--color-teal) 65%, white);
 
   /* Codexyz brand colors from me.md */
   --color-azul: #007acc;
   --color-teal: #00b3b3;
   --color-gris: #4a4a4a;
   --degradado-codexyz: linear-gradient(135deg, var(--color-azul) 0%, var(--color-teal) 70%, var(--color-gris) 100%);
+
+  --app-bg: radial-gradient(1100px 600px at 20% 10%, color-mix(in oklch, var(--color-teal) 14%, transparent), transparent 65%),
+    radial-gradient(900px 520px at 85% 18%, color-mix(in oklch, var(--color-azul) 12%, transparent), transparent 68%),
+    radial-gradient(1100px 720px at 45% 95%, color-mix(in oklch, var(--color-azul) 8%, transparent), transparent 70%);
+  --app-grid: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --app-vignette: radial-gradient(1200px 700px at 50% 20%, transparent 35%, color-mix(in oklch, var(--background) 55%, black) 85%);
 }
 
 
@@ -93,18 +99,18 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
+  --primary: color-mix(in oklch, var(--color-teal) 82%, white);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
+  --accent: color-mix(in oklch, var(--color-azul) 22%, black);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --ring: color-mix(in oklch, var(--color-teal) 55%, black);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -112,12 +118,18 @@
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary: color-mix(in oklch, var(--color-teal) 82%, white);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: color-mix(in oklch, var(--color-teal) 55%, black);
+
+  --app-bg: radial-gradient(1100px 600px at 20% 10%, color-mix(in oklch, var(--color-teal) 18%, transparent), transparent 62%),
+    radial-gradient(900px 520px at 80% 15%, color-mix(in oklch, var(--color-azul) 14%, transparent), transparent 68%),
+    radial-gradient(1100px 720px at 45% 95%, color-mix(in oklch, var(--color-teal) 10%, transparent), transparent 70%);
+  --app-grid: color-mix(in oklch, var(--foreground) 12%, transparent);
+  --app-vignette: radial-gradient(1200px 720px at 50% 18%, transparent 35%, color-mix(in oklch, var(--background) 35%, black) 85%);
 }
 
 @layer base {
@@ -126,7 +138,34 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: var(--app-bg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    isolation: isolate;
   }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to right, var(--app-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--app-grid) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(800px 520px at 50% 0%, black, transparent 75%);
+  opacity: 0.45;
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--app-vignette);
+  opacity: 0.55;
+  z-index: -1;
 }
 
 /* Utility classes for Codexyz brand styling */
@@ -141,4 +180,25 @@
 }
 .text-codexyz-gris {
   color: var(--color-gris);
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity 700ms ease, transform 700ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal][data-visible="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

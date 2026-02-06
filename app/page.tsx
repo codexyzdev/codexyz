@@ -1,7 +1,5 @@
 "use client"
 import { useEffect, useState } from "react"
-import { animate, stagger } from "animejs"
-import { safeDuration } from "@/lib/utils"
 import AppHero from "@/components/AppHero"
 import TechGrid from "@/components/TechGrid"
 import TechModal from "@/components/TechModal"
@@ -23,20 +21,6 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null)
 
   // Los textos por idioma se gestionan ahora en lib/texts y dentro de los componentes
-
-  useEffect(() => {
-    // Animación de entrada para las tarjetas de tecnología
-    animate(
-      ".tech-card",
-      {
-        translateY: [20, 0],
-        opacity: [0, 1],
-        easing: "easeOutQuad",
-        duration: safeDuration(700),
-        delay: stagger(80),
-      }
-    )
-  }, [])
 
   // Inicializa tema y sincroniza con el DOM y localStorage
   useEffect(() => {
@@ -116,12 +100,16 @@ export default function Home() {
   // Envío del formulario ahora es manejado dentro de ContactForm
 
   return (
-    <main className="min-h-svh">
+    <div className="min-h-svh">
       <AppHero
         lang={lang}
         theme={theme}
         onToggleTheme={toggleTheme}
         onToggleLang={toggleLang}
+        onScrollToProjects={() => {
+          const section = document.getElementById("proyectos")
+          section?.scrollIntoView({ behavior: "smooth" })
+        }}
         onScrollToContact={() => {
           const section = document.getElementById("contacto")
           section?.scrollIntoView({ behavior: "smooth" })
@@ -133,14 +121,19 @@ export default function Home() {
       />
 
       <ProjectsGrid lang={lang} onOpen={(p) => setSelectedProject(p)} />
-      <ProjectModal project={selectedProject} lang={lang} onClose={() => setSelectedProject(null)} />
+      <ProjectModal
+        project={selectedProject}
+        lang={lang}
+        onClose={() => setSelectedProject(null)}
+        onNavigate={(p) => setSelectedProject(p)}
+      />
       <TechGrid lang={lang} onSelect={(tech) => setSelectedTech(tech)} id="tecnologias" />
-      <TechModal tech={selectedTech} onClose={() => setSelectedTech(null)} />
+      <TechModal tech={selectedTech} lang={lang} onClose={() => setSelectedTech(null)} />
 
 
       <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14 md:py-20">
         <ContactForm lang={lang} id="contacto" />
       </section>
-    </main>
+    </div>
   )
 }

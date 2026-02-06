@@ -4,15 +4,19 @@ import { useEffect, useRef } from "react"
 import { animate } from "animejs"
 import { safeDuration } from "@/lib/utils"
 import type { TechItem } from "@/lib/tech"
+import type { Lang } from "@/lib/texts"
+import { texts } from "@/lib/texts"
 
 type TechModalProps = {
   tech: TechItem | null
+  lang: Lang
   onClose: () => void
 }
 
-export default function TechModal({ tech, onClose }: TechModalProps) {
+export default function TechModal({ tech, lang, onClose }: TechModalProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null)
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
+  const t = texts[lang]
 
   useEffect(() => {
     function handleEsc(e: KeyboardEvent) {
@@ -78,7 +82,7 @@ export default function TechModal({ tech, onClose }: TechModalProps) {
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
     >
       <button
-        aria-label="Close modal"
+        aria-label={t.closeModal}
         onClick={onClose}
         className="absolute inset-0 bg-black/40"
       />
@@ -98,7 +102,7 @@ export default function TechModal({ tech, onClose }: TechModalProps) {
             className="px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60"
             onClick={onClose}
           >
-            Close
+            {lang === "en" ? "Close" : "Cerrar"}
           </button>
         </div>
       </div>

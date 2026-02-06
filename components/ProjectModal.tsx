@@ -1,19 +1,31 @@
 "use client"
 import Image from "next/image"
-import { useEffect, useRef } from "react"
+import { useEffect, useMemo, useRef } from "react"
 import { animate } from "animejs"
-import { safeDuration } from "@/lib/utils"
-import { ProjectItem } from "@/lib/projects"
+import { cn, safeDuration } from "@/lib/utils"
+import { ProjectItem, projects } from "@/lib/projects"
+import { ExternalLink, ChevronLeft, ChevronRight, X } from "lucide-react"
+import { Button, buttonVariants } from "@/components/ui/button"
 
 type ProjectModalProps = {
   project: ProjectItem | null
   lang: "en" | "es"
   onClose: () => void
+  onNavigate: (project: ProjectItem) => void
 }
 
-export default function ProjectModal({ project, lang, onClose }: ProjectModalProps) {
+export default function ProjectModal({ project, lang, onClose, onNavigate }: ProjectModalProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null)
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
+
+  const nav = useMemo(() => {
+    if (!project) return null
+    const index = projects.findIndex((p) => p.name === project.name)
+    if (index === -1) return null
+    const prev = projects[(index - 1 + projects.length) % projects.length]
+    const next = projects[(index + 1) % projects.length]
+    return { index, prev, next }
+  }, [project])
 
   useEffect(() => {
     if (!project) return
@@ -31,6 +43,11 @@ export default function ProjectModal({ project, lang, onClose }: ProjectModalPro
 
     function handleEsc(e: KeyboardEvent) {
       if (e.key === "Escape") onClose()
+    }
+    function handleArrows(e: KeyboardEvent) {
+      if (!nav) return
+      if (e.key === "ArrowLeft") onNavigate(nav.prev)
+      if (e.key === "ArrowRight") onNavigate(nav.next)
     }
     function handleTab(e: KeyboardEvent) {
       if (e.key !== "Tab" || !dialogRef.current) return
@@ -54,40 +71,152 @@ export default function ProjectModal({ project, lang, onClose }: ProjectModalPro
       }
     }
     document.addEventListener("keydown", handleEsc)
+    document.addEventListener("keydown", handleArrows)
     document.addEventListener("keydown", handleTab)
 
     return () => {
       document.removeEventListener("keydown", handleEsc)
+      document.removeEventListener("keydown", handleArrows)
       document.removeEventListener("keydown", handleTab)
       document.body.style.overflow = prevOverflow
     }
-  }, [project, onClose])
+  }, [project, onClose, nav, onNavigate])
 
   if (!project) return null
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <button
+        type="button"
+        aria-label={lang === "en" ? "Close" : "Cerrar"}
+        className="absolute inset-0 bg-black/60"
+        onClick={onClose}
+      />
+
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-dialog-title"
-        className="relative w-full max-w-5xl h-[75vh] sm:h-[80vh] bg-black rounded-xl overflow-hidden ring-1 ring-white/20"
+        className="relative w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-background/75 backdrop-blur-xl shadow-2xl"
         onClick={(e) => e.stopPropagation()}
         ref={dialogRef}
       >
-        <Image src={project.src} alt={`${project.name} - imagen completa`} fill sizes="100vw" className="object-contain" priority />
-        <h3 id="project-dialog-title" className="sr-only">{project.name}</h3>
-        <button
-          onClick={onClose}
-          type="button"
-          ref={closeBtnRef}
-          className="absolute top-3 right-3 rounded-md bg-white/80 text-black px-3 py-1 text-sm hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60"
-        >
-          {lang === "en" ? "Close" : "Cerrar"}
-        </button>
+        <div className="flex items-start justify-between gap-4 border-b border-border/60 px-4 py-4 sm:px-6">
+          <div className="min-w-0">
+            <h3 id="project-dialog-title" className="text-lg sm:text-xl font-semibold tracking-tight">
+              {project.name}
+            </h3>
+            {project.role?.[lang] && (
+              <div className="mt-1 text-sm text-muted-foreground">
+                {lang === "en" ? "Role:" : "Rol:"} {project.role[lang]}
+              </div>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            {project.href && (
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(buttonVariants({ variant: "outline" }), "h-10 rounded-full")}
+              >
+                {lang === "en" ? "Live" : "Ver"}
+                <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
+              </a>
+            )}
+            <Button
+              ref={closeBtnRef}
+              type="button"
+              variant="ghost"
+              className="h-10 w-10 rounded-full"
+              onClick={onClose}
+              aria-label={lang === "en" ? "Close" : "Cerrar"}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-0">
+          <div className="relative bg-muted/40">
+            <div className="relative h-[240px] sm:h-[340px] lg:h-[520px]">
+              <Image
+                src={project.src}
+                alt={project.description?.[lang] || project.name}
+                fill
+                sizes="(max-width: 1024px) 100vw, 65vw"
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+
+          <div className="px-4 py-5 sm:px-6">
+            {project.description?.[lang] && (
+              <p className="text-sm sm:text-base text-foreground/90">
+                {project.description[lang]}
+              </p>
+            )}
+
+            {!!project.technologies?.length && (
+              <div className="mt-5">
+                <div className="text-xs font-medium text-muted-foreground">
+                  {lang === "en" ? "Tech" : "Tecnologías"}
+                </div>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground ring-1 ring-border/60"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {!!project.highlights?.[lang]?.length && (
+              <div className="mt-5">
+                <div className="text-xs font-medium text-muted-foreground">
+                  {lang === "en" ? "Highlights" : "Puntos clave"}
+                </div>
+                <ul className="mt-2 space-y-2">
+                  {project.highlights[lang].map((item) => (
+                    <li key={item} className="flex gap-2 text-sm text-muted-foreground">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {nav && (
+              <div className="mt-6 flex items-center justify-between gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-10 rounded-full"
+                  onClick={() => onNavigate(nav.prev)}
+                >
+                  <ChevronLeft className="mr-2 h-4 w-4" />
+                  {lang === "en" ? "Prev" : "Anterior"}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-10 rounded-full"
+                  onClick={() => onNavigate(nav.next)}
+                >
+                  {lang === "en" ? "Next" : "Siguiente"}
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )

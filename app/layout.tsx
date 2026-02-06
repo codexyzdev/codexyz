@@ -136,7 +136,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const waText = encodeURIComponent(CONTACT.WHATSAPP_MESSAGE.es);
-  const waUrl = `https://wa.me/${CONTACT.WHATSAPP}?text=${waText}`;
+  const waNumber = CONTACT.WHATSAPP.replace(/\D/g, "");
+  const waUrl = `https://wa.me/${waNumber}?text=${waText}`;
 
   return (
     <html lang="es">
