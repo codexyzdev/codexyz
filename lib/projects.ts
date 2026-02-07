@@ -116,4 +116,30 @@ export const projects: ProjectItem[] = [
     },
     technologies: ["Next.js", "React", "Tailwind CSS"],
   },
+  {
+    name: "Ahorro Compartido 2026",
+    src: "/ahorro-compartido-2026.vercel.app.png",
+    href: "https://ahorro-compartido-2026.vercel.app/",
+    description: {
+      en: "Couples savings challenge app with a dashboard, deposits, and envelope board for 2026 goals",
+      es: "App de reto de ahorro para parejas con tablero, aportes y sobres para objetivos de 2026"
+    },
+    role: {
+      en: "Product + UI development",
+      es: "Producto + desarrollo UI",
+    },
+    highlights: {
+      en: [
+        "Savings dashboard with progress and remaining days",
+        "Envelope-style board for tracking deposits",
+        "Mobile-first UI with clear visual hierarchy",
+      ],
+      es: [
+        "Tablero de ahorro con progreso y días restantes",
+        "Tablero de sobres para registrar y seguir aportes",
+        "UI mobile-first con jerarquía visual clara",
+      ],
+    },
+    technologies: ["Next.js", "React", "Tailwind CSS", "Lucide", "Vercel"],
+  },
 ]
