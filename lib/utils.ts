@@ -64,11 +64,11 @@ export function isMobileDevice(): boolean {
 export function isTouchDevice(): boolean {
   if (typeof window === "undefined") return false
 
+  const nav = navigator as Navigator & { msMaxTouchPoints?: number }
   return (
     "ontouchstart" in window ||
     navigator.maxTouchPoints > 0 ||
-    // @ts-ignore - msMaxTouchPoints is for IE
-    navigator.msMaxTouchPoints > 0
+    (nav.msMaxTouchPoints ?? 0) > 0
   )
 }
 
@@ -89,13 +89,13 @@ export function truncateText(text: string, maxLength: number): string {
  * @param wait - Wait time in milliseconds
  * @returns Debounced function
  */
-export function debounce<T extends (...args: any[]) => any>(
-  func: T,
+export function debounce<Args extends unknown[]>(
+  func: (...args: Args) => void,
   wait: number
-): (...args: Parameters<T>) => void {
+): (...args: Args) => void {
   let timeout: NodeJS.Timeout | null = null
 
-  return function executedFunction(...args: Parameters<T>) {
+  return function executedFunction(...args: Args) {
     const later = () => {
       timeout = null
       func(...args)

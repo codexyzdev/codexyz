@@ -52,14 +52,9 @@ export default function ScrollReveal({
       data-reveal
       data-visible={visible ? "true" : "false"}
       className={cn("reveal", className)}
-      style={
-        {
-          ["--reveal-delay" as any]: `${delayMs}ms`,
-        } as React.CSSProperties
-      }
+      style={{ "--reveal-delay": `${delayMs}ms` } as React.CSSProperties}
     >
       {children}
     </div>
   )
 }
-

@@ -1,9 +1,23 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useSyncExternalStore } from "react"
 
 export interface ScrollPosition {
     x: number
     y: number
+}
+
+const SERVER_SCROLL_POSITION: ScrollPosition = { x: 0, y: 0 }
+let cachedScrollPosition: ScrollPosition = SERVER_SCROLL_POSITION
+let cachedScrollDirection: "up" | "down" | "none" = "none"
+let lastScrollDirectionY = 0
+
+function readScrollPosition(): ScrollPosition {
+    if (typeof window === "undefined") return SERVER_SCROLL_POSITION
+    const x = window.scrollX
+    const y = window.scrollY
+    if (cachedScrollPosition.x === x && cachedScrollPosition.y === y) return cachedScrollPosition
+    cachedScrollPosition = { x, y }
+    return cachedScrollPosition
 }
 
 /**
@@ -12,43 +26,26 @@ export interface ScrollPosition {
  * @returns Current scroll position {x, y}
  */
 export function useScrollPosition(throttleMs: number = 100): ScrollPosition {
-    const [scrollPosition, setScrollPosition] = useState<ScrollPosition>({
-        x: 0,
-        y: 0,
-    })
+    const subscribe = (onStoreChange: () => void) => {
+        if (typeof window === "undefined") return () => {}
 
-    useEffect(() => {
-        if (typeof window === "undefined") return
-
-        let timeoutId: NodeJS.Timeout | null = null
-
+        let timeoutId: number | null = null
         const handleScroll = () => {
-            if (timeoutId) return
-
-            timeoutId = setTimeout(() => {
-                setScrollPosition({
-                    x: window.scrollX,
-                    y: window.scrollY,
-                })
+            if (timeoutId !== null) return
+            timeoutId = window.setTimeout(() => {
                 timeoutId = null
+                onStoreChange()
             }, throttleMs)
         }
 
-        // Set initial position
-        setScrollPosition({
-            x: window.scrollX,
-            y: window.scrollY,
-        })
-
         window.addEventListener("scroll", handleScroll, { passive: true })
-
         return () => {
-            if (timeoutId) clearTimeout(timeoutId)
+            if (timeoutId !== null) window.clearTimeout(timeoutId)
             window.removeEventListener("scroll", handleScroll)
         }
-    }, [throttleMs])
+    }
 
-    return scrollPosition
+    return useSyncExternalStore(subscribe, readScrollPosition, () => SERVER_SCROLL_POSITION)
 }
 
 /**
@@ -66,40 +63,37 @@ export function useScrolledPast(threshold: number = 100): boolean {
  * @returns "up" | "down" | "none"
  */
 export function useScrollDirection(): "up" | "down" | "none" {
-    const [direction, setDirection] = useState<"up" | "down" | "none">("none")
-    const [lastY, setLastY] = useState(0)
+    const subscribe = (onStoreChange: () => void) => {
+        if (typeof window === "undefined") return () => {}
 
-    useEffect(() => {
-        if (typeof window === "undefined") return
-
-        let timeoutId: NodeJS.Timeout | null = null
-
+        let timeoutId: number | null = null
         const handleScroll = () => {
-            if (timeoutId) return
-
-            timeoutId = setTimeout(() => {
-                const currentY = window.scrollY
-
-                if (currentY > lastY) {
-                    setDirection("down")
-                } else if (currentY < lastY) {
-                    setDirection("up")
-                } else {
-                    setDirection("none")
-                }
-
-                setLastY(currentY)
+            if (timeoutId !== null) return
+            timeoutId = window.setTimeout(() => {
                 timeoutId = null
+                const currentY = window.scrollY
+                cachedScrollDirection =
+                    currentY > lastScrollDirectionY
+                        ? "down"
+                        : currentY < lastScrollDirectionY
+                            ? "up"
+                            : "none"
+                lastScrollDirectionY = currentY
+                onStoreChange()
             }, 100)
         }
 
         window.addEventListener("scroll", handleScroll, { passive: true })
-
         return () => {
-            if (timeoutId) clearTimeout(timeoutId)
+            if (timeoutId !== null) window.clearTimeout(timeoutId)
             window.removeEventListener("scroll", handleScroll)
         }
-    }, [lastY])
+    }
 
-    return direction
+    const getSnapshot = () => {
+        if (typeof window === "undefined") return "none"
+        return cachedScrollDirection
+    }
+
+    return useSyncExternalStore(subscribe, getSnapshot, () => "none")
 }

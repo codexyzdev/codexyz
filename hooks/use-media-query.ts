@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useSyncExternalStore } from "react"
 
 /**
  * Hook to detect media query matches
@@ -7,37 +7,22 @@ import { useState, useEffect } from "react"
  * @returns boolean indicating if the media query matches
  */
 export function useMediaQuery(query: string): boolean {
-    const [matches, setMatches] = useState(false)
-
-    useEffect(() => {
-        // Check if window is available (client-side)
-        if (typeof window === "undefined") return
+    const subscribe = (onStoreChange: () => void) => {
+        if (typeof window === "undefined") return () => {}
 
         const mediaQuery = window.matchMedia(query)
+        const handler = () => onStoreChange()
 
-        // Set initial value
-        setMatches(mediaQuery.matches)
+        mediaQuery.addEventListener("change", handler)
+        return () => mediaQuery.removeEventListener("change", handler)
+    }
 
-        // Create event listener
-        const handler = (event: MediaQueryListEvent) => {
-            setMatches(event.matches)
-        }
+    const getSnapshot = () => {
+        if (typeof window === "undefined") return false
+        return window.matchMedia(query).matches
+    }
 
-        // Modern browsers
-        if (mediaQuery.addEventListener) {
-            mediaQuery.addEventListener("change", handler)
-            return () => mediaQuery.removeEventListener("change", handler)
-        }
-        // Fallback for older browsers
-        else {
-            // @ts-ignore - addListener is deprecated but needed for older browsers
-            mediaQuery.addListener(handler)
-            // @ts-ignore
-            return () => mediaQuery.removeListener(handler)
-        }
-    }, [query])
-
-    return matches
+    return useSyncExternalStore(subscribe, getSnapshot, () => false)
 }
 
 /**

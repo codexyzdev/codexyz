@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useSyncExternalStore } from "react"
 import AppHero from "@/components/AppHero"
 import TechGrid from "@/components/TechGrid"
 import TechModal from "@/components/TechModal"
@@ -8,81 +8,94 @@ import ProjectModal from "@/components/ProjectModal"
 import ContactForm from "@/components/ContactForm"
 import type { TechItem } from "@/lib/tech"
 import type { ProjectItem } from "@/lib/projects"
+import type { Lang } from "@/lib/texts"
 // Eliminamos react-icons para la sección de tecnologías; usaremos íconos locales desde /public
 
 // CONTACT_EMAIL movido al componente ContactForm
 
 // technologiesByLang ahora se gestiona desde lib/tech y TechGrid
 
+const PREF_EVENT = "codexyz:pref"
+
+function subscribePrefs(onStoreChange: () => void) {
+  if (typeof window === "undefined") return () => {}
+
+  const handler = () => onStoreChange()
+  window.addEventListener(PREF_EVENT, handler)
+  window.addEventListener("storage", handler)
+  return () => {
+    window.removeEventListener(PREF_EVENT, handler)
+    window.removeEventListener("storage", handler)
+  }
+}
+
+function getLangSnapshot(): "en" | "es" {
+  if (typeof window === "undefined") return "es"
+  try {
+    const stored = localStorage.getItem("lang")
+    if (stored === "en" || stored === "es") return stored
+  } catch {}
+
+  const browserLang = (navigator.language || navigator.languages?.[0] || "es").toLowerCase()
+  return browserLang.startsWith("es") ? "es" : "en"
+}
+
+function getThemeSnapshot(): "light" | "dark" {
+  if (typeof window === "undefined") return "light"
+  try {
+    const stored = localStorage.getItem("theme")
+    if (stored === "light" || stored === "dark") return stored
+  } catch {}
+
+  const prefersDark =
+    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+  return prefersDark ? "dark" : "light"
+}
+
 export default function Home() {
-  const [lang, setLang] = useState<"en" | "es">("en")
-  const [theme, setTheme] = useState<"light" | "dark">("light")
+  const lang = useSyncExternalStore<Lang>(subscribePrefs, getLangSnapshot, () => "es")
+  const theme = useSyncExternalStore<"light" | "dark">(
+    subscribePrefs,
+    getThemeSnapshot,
+    () => "light"
+  )
   const [selectedTech, setSelectedTech] = useState<TechItem | null>(null)
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null)
 
   // Los textos por idioma se gestionan ahora en lib/texts y dentro de los componentes
 
-  // Inicializa tema y sincroniza con el DOM y localStorage
   useEffect(() => {
-    const stored = (typeof window !== "undefined" && localStorage.getItem("theme")) as
-      | "light"
-      | "dark"
-      | null
-    const prefersDark =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    const initial = stored ? stored : prefersDark ? "dark" : "light"
-    setTheme(initial)
     if (typeof document !== "undefined") {
-      document.documentElement.classList.toggle("dark", initial === "dark")
+      document.documentElement.classList.toggle("dark", theme === "dark")
     }
-  }, [])
+  }, [theme])
 
-  // Detecta idioma del dispositivo/navegador en el primer render.
-  // Si el usuario ya eligió manualmente, respetamos localStorage.
   useEffect(() => {
-    const storedLang = (typeof window !== "undefined" && localStorage.getItem("lang")) as
-      | "en"
-      | "es"
-      | null
-    const browserLang =
-      (typeof navigator !== "undefined" && (navigator.language || navigator.languages?.[0])) || "en"
-    const initialLang: "en" | "es" = storedLang
-      ? storedLang
-      : browserLang.toLowerCase().startsWith("es")
-      ? "es"
-      : "en"
-    setLang(initialLang)
     if (typeof document !== "undefined") {
-      document.documentElement.lang = initialLang
+      document.documentElement.lang = lang
     }
-  }, [])
+  }, [lang])
 
   const toggleLang = () => {
-    setLang((prev) => {
-      const next: "en" | "es" = prev === "en" ? "es" : "en"
-      if (typeof window !== "undefined") {
-        localStorage.setItem("lang", next)
-      }
-      if (typeof document !== "undefined") {
-        document.documentElement.lang = next
-      }
-      return next
-    })
+    const next: "en" | "es" = lang === "en" ? "es" : "en"
+    try {
+      localStorage.setItem("lang", next)
+    } catch {}
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = next
+    }
+    window.dispatchEvent(new Event(PREF_EVENT))
   }
 
   const toggleTheme = () => {
-    setTheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark"
-      if (typeof document !== "undefined") {
-        document.documentElement.classList.toggle("dark", next === "dark")
-      }
-      if (typeof window !== "undefined") {
-        localStorage.setItem("theme", next)
-      }
-      return next
-    })
+    const next: "light" | "dark" = theme === "dark" ? "light" : "dark"
+    try {
+      localStorage.setItem("theme", next)
+    } catch {}
+    if (typeof document !== "undefined") {
+      document.documentElement.classList.toggle("dark", next === "dark")
+    }
+    window.dispatchEvent(new Event(PREF_EVENT))
   }
 
   // Cierra la modal con Escape para mejorar la accesibilidad
