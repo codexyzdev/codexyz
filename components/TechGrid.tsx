@@ -34,7 +34,7 @@ export default function TechGrid({ lang, onSelect, id }: TechGridProps) {
     <section
       id={id}
       aria-labelledby="tech-title"
-      className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14 md:py-20"
+      className="cv-auto mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14 md:py-20"
     >
       <ScrollReveal>
         <h2 id="tech-title" className="text-2xl font-semibold">
@@ -70,7 +70,7 @@ export default function TechGrid({ lang, onSelect, id }: TechGridProps) {
                       if (e.key === "Enter" || e.key === " ") onSelect(tech)
                     }}
                     aria-label={`Open ${tech.name} info`}
-                    className="group transition-all duration-300 hover:bg-card/90 hover:shadow-md hover:-translate-y-0.5 dark:hover:bg-card/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 bg-card/70 backdrop-blur-sm"
+                    className="group transition-all duration-300 hover:bg-card/90 hover:shadow-md hover:-translate-y-0.5 dark:hover:bg-card/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 bg-card/70"
                   >
                     <div className="p-3">
                       <div className="flex items-center gap-3">

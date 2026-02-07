@@ -139,15 +139,15 @@
   body {
     @apply bg-background text-foreground;
     background-image: var(--app-bg);
-    background-attachment: fixed;
     background-repeat: no-repeat;
     isolation: isolate;
+    position: relative;
   }
 }
 
 body::before {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   pointer-events: none;
   background-image: linear-gradient(to right, var(--app-grid) 1px, transparent 1px),
@@ -160,7 +160,7 @@ body::before {
 
 body::after {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   pointer-events: none;
   background-image: var(--app-vignette);
@@ -201,4 +201,21 @@ body::after {
     transform: none;
     transition: none;
   }
+}
+
+@media (max-width: 640px) {
+  body::before {
+    background-size: 96px 96px;
+    opacity: 0.22;
+    mask-image: none;
+  }
+
+  body::after {
+    opacity: 0.38;
+  }
+}
+
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
 }

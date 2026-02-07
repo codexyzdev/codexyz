@@ -144,7 +144,7 @@ export default function Home() {
       <TechModal tech={selectedTech} lang={lang} onClose={() => setSelectedTech(null)} />
 
 
-      <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <section className="cv-auto mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14 md:py-20">
         <ContactForm lang={lang} id="contacto" />
       </section>
     </div>

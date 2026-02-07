@@ -16,7 +16,7 @@ export default function ProjectsGrid({ lang, onOpen }: ProjectsGridProps) {
   const rest = projects.filter((p) => p.name !== featured?.name)
 
   return (
-    <section id="proyectos" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+    <section id="proyectos" className="cv-auto mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14 md:py-20">
       <h2 className="text-2xl font-semibold">{t.projects}</h2>
       <p className="mt-2 text-muted-foreground">{t.projectsDesc}</p>
 
@@ -26,7 +26,7 @@ export default function ProjectsGrid({ lang, onOpen }: ProjectsGridProps) {
             type="button"
             onClick={() => onOpen(featured)}
             aria-label={`${lang === "en" ? "Open featured project" : "Abrir proyecto destacado"}: ${featured.name}`}
-            className="group w-full text-left rounded-2xl overflow-hidden border border-input/60 bg-card/70 backdrop-blur-sm shadow-sm transition-all duration-300 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60"
+            className="group w-full text-left rounded-2xl overflow-hidden border border-input/60 bg-card/70 shadow-sm transition-all duration-300 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60"
           >
             <div className="grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr]">
               <div className="relative min-h-[260px] md:min-h-[360px] bg-muted">
@@ -39,7 +39,6 @@ export default function ProjectsGrid({ lang, onOpen }: ProjectsGridProps) {
                   placeholder="blur"
                   blurDataURL={getBlurDataURL()}
                   priority
-                  quality={88}
                 />
                 <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs text-white ring-1 ring-white/15 backdrop-blur">
@@ -116,7 +115,7 @@ export default function ProjectsGrid({ lang, onOpen }: ProjectsGridProps) {
               key={p.name}
               onClick={() => onOpen(p)}
               aria-label={`${lang === "en" ? "View details for" : "Ver detalles de"} ${p.name}`}
-              className="group text-left w-full overflow-hidden rounded-2xl border border-input/60 bg-card/70 backdrop-blur-sm shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60"
+              className="group text-left w-full overflow-hidden rounded-2xl border border-input/60 bg-card/70 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60"
               type="button"
             >
               <div className="relative w-full h-56 sm:h-64 bg-muted">
@@ -129,7 +128,6 @@ export default function ProjectsGrid({ lang, onOpen }: ProjectsGridProps) {
                   placeholder="blur"
                   blurDataURL={getBlurDataURL()}
                   priority={isPriority}
-                  quality={85}
                 />
                 <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-70" />
               </div>

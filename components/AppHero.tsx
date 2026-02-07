@@ -1,22 +1,29 @@
-"use client"
-import { useEffect, useRef } from "react"
-import { animate, stagger } from "animejs"
-import Logo from "@/components/logo"
-import { Button } from "@/components/ui/button"
-import { Sun, Moon, Mail, Grid3x3, ArrowDownRight, FolderKanban } from "lucide-react"
-import { texts, Lang } from "@/lib/texts"
-import { safeDuration } from "@/lib/utils"
-import { A11Y } from "@/lib/constants"
+"use client";
+import { useEffect, useRef } from "react";
+import { animate, stagger } from "animejs";
+import Logo from "@/components/logo";
+import { Button } from "@/components/ui/button";
+import {
+  Sun,
+  Moon,
+  Mail,
+  Grid3x3,
+  ArrowDownRight,
+  FolderKanban,
+} from "lucide-react";
+import { texts, Lang } from "@/lib/texts";
+import { safeDuration } from "@/lib/utils";
+import { A11Y } from "@/lib/constants";
 
 type AppHeroProps = {
-  lang: Lang
-  theme: "light" | "dark"
-  onToggleTheme: () => void
-  onToggleLang: () => void
-  onScrollToProjects: () => void
-  onScrollToContact: () => void
-  onScrollToTech: () => void
-}
+  lang: Lang;
+  theme: "light" | "dark";
+  onToggleTheme: () => void;
+  onToggleLang: () => void;
+  onScrollToProjects: () => void;
+  onScrollToContact: () => void;
+  onScrollToTech: () => void;
+};
 
 export default function AppHero({
   lang,
@@ -27,18 +34,18 @@ export default function AppHero({
   onScrollToContact,
   onScrollToTech,
 }: AppHeroProps) {
-  const t = texts[lang]
-  const heroRef = useRef<HTMLDivElement>(null)
+  const t = texts[lang];
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = heroRef.current
-    if (!el) return
+    const el = heroRef.current;
+    if (!el) return;
 
     animate(el, {
       opacity: [0, 1],
       duration: safeDuration(420),
       easing: "easeOutQuad",
-    })
+    });
 
     animate(el.querySelectorAll(".hero-reveal"), {
       opacity: [0, 1],
@@ -46,25 +53,25 @@ export default function AppHero({
       duration: safeDuration(820),
       easing: "easeOutQuad",
       delay: stagger(90),
-    })
-  }, [])
+    });
+  }, []);
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden  min-h-screen">
       <div className="absolute inset-0 -z-10 bg-codexyz-gradient" />
       <div
         aria-hidden
-        className="absolute -z-10 left-1/2 top-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-white/10 blur-3xl"
+        className="hidden sm:block absolute -z-10 left-1/2 top-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-white/10 blur-3xl"
       />
       <div
         aria-hidden
-        className="absolute -z-10 -left-24 top-16 h-[420px] w-[420px] rounded-full bg-black/15 blur-3xl"
+        className="hidden sm:block absolute -z-10 -left-24 top-16 h-[420px] w-[420px] rounded-full bg-black/15 blur-3xl"
       />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14 md:py-20">
         <div
           ref={heroRef}
-          className="opacity-0 rounded-3xl bg-white/6 dark:bg-black/20 backdrop-blur-md ring-1 ring-white/18 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.55)]"
+          className="opacity-0 rounded-3xl bg-white/6 dark:bg-black/20 backdrop-blur-sm sm:backdrop-blur-md ring-1 ring-white/18 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.55)]"
         >
           <div className="flex flex-col gap-6 px-4 py-5 sm:px-8 sm:py-8">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -77,7 +84,9 @@ export default function AppHero({
                 />
                 <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs text-white/90 ring-1 ring-white/15">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-300" />
-                  {lang === "en" ? "Open to projects" : "Disponible para proyectos"}
+                  {lang === "en"
+                    ? "Open to projects"
+                    : "Disponible para proyectos"}
                 </span>
               </div>
 
@@ -85,11 +94,19 @@ export default function AppHero({
                 <Button
                   variant="ghost"
                   className="text-white hover:bg-white/10 min-h-[44px] min-w-[44px]"
-                  aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+                  aria-label={
+                    theme === "dark"
+                      ? "Cambiar a modo claro"
+                      : "Cambiar a modo oscuro"
+                  }
                   onClick={onToggleTheme}
                   type="button"
                 >
-                  {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                  {theme === "dark" ? (
+                    <Sun className="h-4 w-4" />
+                  ) : (
+                    <Moon className="h-4 w-4" />
+                  )}
                 </Button>
                 <Button
                   variant="ghost"
@@ -111,7 +128,9 @@ export default function AppHero({
                 <h1 className="hero-reveal mt-3 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
                   <span className="text-white">{t.heroTitle}</span>{" "}
                   <span className="block mt-2 bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-                    {lang === "en" ? "Modern web apps. Clean UX." : "Apps modernas. UX limpia."}
+                    {lang === "en"
+                      ? "Modern web apps. Clean UX."
+                      : "Apps modernas. UX limpia."}
                   </span>
                 </h1>
 
@@ -155,7 +174,9 @@ export default function AppHero({
 
               <div className="hero-reveal hidden lg:block">
                 <div className="w-[320px] rounded-2xl bg-white/8 ring-1 ring-white/18 p-4">
-                  <div className="text-xs text-white/75">{lang === "en" ? "Focus" : "Enfoque"}</div>
+                  <div className="text-xs text-white/75">
+                    {lang === "en" ? "Focus" : "Enfoque"}
+                  </div>
                   <div className="mt-2 grid gap-2 text-sm text-white">
                     <div className="flex items-center justify-between rounded-xl bg-white/8 px-3 py-2 ring-1 ring-white/12">
                       <span>{lang === "en" ? "Frontend" : "Frontend"}</span>
@@ -167,7 +188,11 @@ export default function AppHero({
                     </div>
                     <div className="flex items-center justify-between rounded-xl bg-white/8 px-3 py-2 ring-1 ring-white/12">
                       <span>{lang === "en" ? "UX" : "UX"}</span>
-                      <span className="text-white/80">{lang === "en" ? "Fast, clear, accessible" : "Rápida, clara, accesible"}</span>
+                      <span className="text-white/80">
+                        {lang === "en"
+                          ? "Fast, clear, accessible"
+                          : "Rápida, clara, accesible"}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -189,5 +214,5 @@ export default function AppHero({
         </div>
       </div>
     </section>
-  )
+  );
 }

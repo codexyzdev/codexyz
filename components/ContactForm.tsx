@@ -144,7 +144,7 @@ ${message}
   return (
     <section id={id} aria-labelledby="contact-title" className="mt-10">
       <ScrollReveal>
-        <div className="rounded-3xl bg-card/70 backdrop-blur-md ring-1 ring-border/70 shadow-sm p-6 md:p-8">
+        <div className="rounded-3xl bg-card/70 backdrop-blur-sm md:backdrop-blur-md ring-1 ring-border/70 shadow-sm p-6 md:p-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h2 id="contact-title" className="text-xl md:text-2xl font-semibold">
