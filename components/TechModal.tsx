@@ -86,7 +86,10 @@ export default function TechModal({ tech, lang, onClose }: TechModalProps) {
         onClick={onClose}
         className="absolute inset-0 bg-black/40"
       />
-      <div ref={dialogRef} className="relative w-full sm:max-w-md mx-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 shadow-xl">
+      <div
+        ref={dialogRef}
+        className="relative w-full sm:max-w-md mx-4 max-h-[calc(100svh-2rem)] overflow-y-auto overscroll-contain rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-xl"
+      >
         <div className="flex items-center gap-3 mb-3">
           <div className="relative w-8 h-8">
             <Image src={tech.imgLight} alt={tech.name} fill className="dark:hidden" />
