@@ -93,7 +93,7 @@ export default function AppHero({
               <div className="flex items-center gap-2 self-start sm:self-auto hero-reveal">
                 <Button
                   variant="ghost"
-                  className="text-white hover:bg-white/10 min-h-[44px] min-w-[44px]"
+                  className="text-white hover:bg-white/10 min-h-11 min-w-11"
                   aria-label={
                     theme === "dark"
                       ? "Cambiar a modo claro"
@@ -110,7 +110,7 @@ export default function AppHero({
                 </Button>
                 <Button
                   variant="ghost"
-                  className="text-white hover:bg-white/10 min-h-[44px]"
+                  className="text-white hover:bg-white/10 min-h-11"
                   onClick={onToggleLang}
                   type="button"
                   aria-label={`Change language to ${lang === "en" ? "Spanish" : "English"}`}
@@ -127,7 +127,7 @@ export default function AppHero({
                 </p>
                 <h1 className="hero-reveal mt-3 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
                   <span className="text-white">{t.heroTitle}</span>{" "}
-                  <span className="block mt-2 bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
+                  <span className="block mt-2 bg-linear-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
                     {lang === "en"
                       ? "Modern web apps. Clean UX."
                       : "Apps modernas. UX limpia."}
@@ -140,7 +140,7 @@ export default function AppHero({
 
                 <div className="hero-reveal mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
                   <Button
-                    className="w-full sm:w-auto h-11 rounded-full bg-white text-black hover:bg-white/92 shadow-sm transition-colors min-h-[44px]"
+                    className="w-full sm:w-auto h-11 rounded-full bg-white text-black hover:bg-white/92 shadow-sm transition-colors min-h-11"
                     onClick={onScrollToContact}
                     type="button"
                   >
@@ -151,7 +151,7 @@ export default function AppHero({
 
                   <Button
                     variant="outline"
-                    className="w-full sm:w-auto h-11 rounded-full border transition-colors shadow-sm bg-black/25 text-white border-white/25 hover:bg-black/35 dark:bg-white/12 dark:hover:bg-white/18 min-h-[44px]"
+                    className="w-full sm:w-auto h-11 rounded-full border transition-colors shadow-sm bg-black/25 text-white border-white/25 hover:bg-black/35 dark:bg-white/12 dark:hover:bg-white/18 min-h-11"
                     onClick={onScrollToProjects}
                     type="button"
                   >
@@ -161,7 +161,7 @@ export default function AppHero({
 
                   <Button
                     variant="outline"
-                    className="w-full sm:w-auto h-11 rounded-full border transition-colors shadow-sm bg-black/25 text-white border-white/25 hover:bg-black/35 dark:bg-white/12 dark:hover:bg-white/18 min-h-[44px]"
+                    className="w-full sm:w-auto h-11 rounded-full border transition-colors shadow-sm bg-black/25 text-white border-white/25 hover:bg-black/35 dark:bg-white/12 dark:hover:bg-white/18 min-h-11"
                     onClick={onScrollToTech}
                     type="button"
                     style={{ minHeight: A11Y.MIN_TOUCH_TARGET }}
@@ -203,7 +203,7 @@ export default function AppHero({
               <button
                 type="button"
                 onClick={onScrollToProjects}
-                className="inline-flex items-center gap-2 text-xs text-white/85 hover:text-white transition-colors min-h-[44px]"
+                className="inline-flex items-center gap-2 text-xs text-white/85 hover:text-white transition-colors min-h-11"
               >
                 {lang === "en" ? "Scroll to work" : "Ver trabajo"}
                 <ArrowDownRight className="h-4 w-4 opacity-70" />

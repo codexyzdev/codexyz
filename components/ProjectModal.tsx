@@ -140,7 +140,7 @@ export default function ProjectModal({ project, lang, onClose, onNavigate }: Pro
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-0">
           <div className="relative bg-muted/40">
-            <div className="relative h-[240px] sm:h-[340px] lg:h-[520px]">
+            <div className="relative h-60 sm:h-[340px] lg:h-[520px]">
               <Image
                 src={project.src}
                 alt={project.description?.[lang] || project.name}

@@ -40,7 +40,7 @@ export default function ProjectsGrid({ lang, onOpen }: ProjectsGridProps) {
                   blurDataURL={getBlurDataURL()}
                   priority
                 />
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                <div aria-hidden className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs text-white ring-1 ring-white/15 backdrop-blur">
                   <Sparkles className="h-3.5 w-3.5" />
                   {lang === "en" ? "Featured" : "Destacado"}
@@ -129,7 +129,7 @@ export default function ProjectsGrid({ lang, onOpen }: ProjectsGridProps) {
                   blurDataURL={getBlurDataURL()}
                   priority={isPriority}
                 />
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-70" />
+                <div aria-hidden className="absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent opacity-70" />
               </div>
 
               <div className="p-4">

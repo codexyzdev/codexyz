@@ -158,7 +158,7 @@ ${message}
             <div className="flex flex-wrap gap-2">
               <a
                 href={`mailto:${CONTACT.EMAIL}`}
-                className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-xs text-muted-foreground ring-1 ring-border/60 hover:bg-muted/80 transition-colors min-h-[44px]"
+                className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-xs text-muted-foreground ring-1 ring-border/60 hover:bg-muted/80 transition-colors min-h-11"
               >
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 {CONTACT.EMAIL}
@@ -167,7 +167,7 @@ ${message}
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-xs text-muted-foreground ring-1 ring-border/60 hover:bg-muted/80 transition-colors min-h-[44px]"
+                className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-xs text-muted-foreground ring-1 ring-border/60 hover:bg-muted/80 transition-colors min-h-11"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 WhatsApp
@@ -263,7 +263,7 @@ ${message}
               <p className="text-xs text-muted-foreground">
                 {t.contactDesc}
               </p>
-              <Button type="submit" className="h-11 rounded-full min-h-[44px]">
+              <Button type="submit" className="h-11 rounded-full min-h-11">
                 {t.sendGmail}
               </Button>
             </div>
