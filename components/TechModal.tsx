@@ -79,7 +79,7 @@ export default function TechModal({ tech, lang, onClose }: TechModalProps) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="tech-dialog-title"
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+      className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center"
     >
       <button
         aria-label={t.closeModal}
