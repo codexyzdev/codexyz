@@ -2,6 +2,7 @@ export type ProjectItem = {
   name: string
   src: string
   href?: string
+  year?: number
   description?: {
     en: string
     es: string
@@ -23,6 +24,7 @@ export const projects: ProjectItem[] = [
     name: "DevPulse",
     src: "/devpulse-seven.vercel.app.png",
     href: "https://devpulse-seven.vercel.app/",
+    year: 2025,
     description: {
       en: "Smart Pomodoro timer designed specifically for developers with AI-powered focus assistance",
       es: "Temporizador Pomodoro inteligente diseñado específicamente para desarrolladores con asistencia de IA"
@@ -46,9 +48,10 @@ export const projects: ProjectItem[] = [
     technologies: ["Next.js", "React", "TypeScript", "Supabase"],
     featured: true,
   },
-  {
+{
     name: "Los Tiburones",
     src: "/los-tiburones.png",
+    year: 2024,
     description: {
       en: "Business website with modern design and responsive layout",
       es: "Sitio web empresarial con diseño moderno y diseño responsive"
@@ -69,9 +72,10 @@ export const projects: ProjectItem[] = [
     },
     technologies: ["Next.js", "React", "Tailwind CSS"],
   },
-  {
+{
     name: "Financiamientos",
     src: "/financiamientos.png",
+    year: 2024,
     description: {
       en: "Financial services platform with intuitive user interface",
       es: "Plataforma de servicios financieros con interfaz de usuario intuitiva"
@@ -92,10 +96,11 @@ export const projects: ProjectItem[] = [
     },
     technologies: ["Next.js", "React", "TypeScript"],
   },
-  {
+{
     name: "Chess Clock",
     src: "/chess-clock.png",
     href: "https://chess-clock-by-codexyzdev.vercel.app/",
+    year: 2024,
     description: {
       en: "Professional chess timer with multiple time control modes",
       es: "Temporizador de ajedrez profesional con múltiples modos de control de tiempo"
@@ -116,10 +121,11 @@ export const projects: ProjectItem[] = [
     },
     technologies: ["Next.js", "React", "Tailwind CSS"],
   },
-  {
+{
     name: "Ahorro Compartido 2026",
     src: "/ahorro-compartido-2026.vercel.app.png",
     href: "https://ahorro-compartido-2026.vercel.app/",
+    year: 2025,
     description: {
       en: "Couples savings challenge app with a dashboard, deposits, and envelope board for 2026 goals",
       es: "App de reto de ahorro para parejas con tablero, aportes y sobres para objetivos de 2026"

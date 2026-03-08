@@ -184,8 +184,8 @@ body::after {
 
 [data-reveal] {
   opacity: 0;
-  transform: translate3d(0, 14px, 0);
-  transition: opacity 700ms ease, transform 700ms ease;
+  transform: var(--reveal-transform, translate3d(0, 14px, 0));
+  transition: opacity var(--reveal-duration, 700ms) ease, transform var(--reveal-duration, 700ms) ease;
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
@@ -218,4 +218,189 @@ body::after {
 .cv-auto {
   content-visibility: auto;
   contain-intrinsic-size: 1px 900px;
+}
+
+/* ===== ENHANCED GLASS EFFECTS ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dark .glass-light {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
+}
+
+.dark .glass-hover:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===== TILT 3D EFFECT UTILITIES ===== */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tilt-card:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateZ(8px);
+}
+
+.tilt-card-reverse:hover {
+  transform: perspective(1000px) rotateX(-2deg) rotateY(2deg) translateZ(8px);
+}
+
+/* ===== GLOW EFFECTS ===== */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-azul), var(--color-teal), var(--color-azul));
+  background-size: 200% 200%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.glow-shadow {
+  box-shadow: 0 0 0 0 transparent;
+  transition: all 0.3s ease;
+}
+
+.glow-shadow:hover {
+  box-shadow: 0 0 30px -8px var(--color-teal), 0 0 60px -16px var(--color-azul);
+}
+
+/* ===== TEXT GLOW ===== */
+.text-glow {
+  text-shadow: 0 0 20px rgba(0, 186, 186, 0.5), 0 0 40px rgba(0, 122, 204, 0.3);
+}
+
+/* ===== IMPROVED TYPOGRAPHY ===== */
+.tracking-tight-enhanced {
+  letter-spacing: -0.025em;
+}
+
+.tracking-relaxed-enhanced {
+  letter-spacing: 0.025em;
+}
+
+.line-height-relaxed {
+  line-height: 1.75;
+}
+
+/* ===== MICRO-INTERACTIONS ===== */
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-scale:active {
+  transform: scale(0.98);
+}
+
+/* ===== IMPROVED FOCUS STATES ===== */
+.focus-ring-enhanced:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-teal), 0 0 0 6px color-mix(in oklch, var(--color-teal) 30%, transparent);
+}
+
+/* ===== BUTTON IMPROVEMENTS ===== */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.btn-glow:hover::after {
+  transform: translateX(100%);
+}
+
+/* ===== BADGE STYLES ===== */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(0, 122, 204, 0.1);
+  color: var(--color-azul);
+  border: 1px solid color-mix(in oklch, var(--color-azul) 20%, transparent);
+}
+
+.dark .badge-pill {
+  background: color-mix(in oklch, var(--color-teal) 15%, transparent);
+  color: color-mix(in oklch, var(--color-teal) 80%, white);
+  border-color: color-mix(in oklch, var(--color-teal) 25%, transparent);
+}
+
+.badge-year {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+/* ===== INPUT FOCUS ANIMATIONS ===== */
+.input-glow {
+  transition: all 0.2s ease;
+}
+
+.input-glow:focus {
+  border-color: var(--color-teal);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-teal) 25%, transparent), 0 0 20px -8px var(--color-teal);
 }

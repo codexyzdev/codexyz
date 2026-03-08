@@ -8,6 +8,8 @@ type ScrollRevealProps = {
   className?: string
   delayMs?: number
   once?: boolean
+  direction?: "up" | "down" | "left" | "right" | "scale"
+  duration?: number
 }
 
 export default function ScrollReveal({
@@ -15,9 +17,28 @@ export default function ScrollReveal({
   className,
   delayMs = 0,
   once = true,
+  direction = "up",
+  duration = 700,
 }: ScrollRevealProps) {
   const ref = React.useRef<HTMLDivElement | null>(null)
   const [visible, setVisible] = React.useState(false)
+
+  const getInitialTransform = () => {
+    switch (direction) {
+      case "up":
+        return "translate3d(0, 24px, 0)"
+      case "down":
+        return "translate3d(0, -24px, 0)"
+      case "left":
+        return "translate3d(24px, 0, 0)"
+      case "right":
+        return "translate3d(-24px, 0, 0)"
+      case "scale":
+        return "scale(0.92)"
+      default:
+        return "translate3d(0, 24px, 0)"
+    }
+  }
 
   React.useEffect(() => {
     if (prefersReducedMotion()) {
@@ -39,7 +60,7 @@ export default function ScrollReveal({
           setVisible(false)
         }
       },
-      { root: null, threshold: 0.18, rootMargin: "0px 0px -10% 0px" }
+      { root: null, threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
     )
 
     observer.observe(el)
@@ -52,7 +73,11 @@ export default function ScrollReveal({
       data-reveal
       data-visible={visible ? "true" : "false"}
       className={cn("reveal", className)}
-      style={{ "--reveal-delay": `${delayMs}ms` } as React.CSSProperties}
+      style={{
+        "--reveal-delay": `${delayMs}ms`,
+        "--reveal-duration": `${duration}ms`,
+        "--reveal-transform": getInitialTransform(),
+      } as React.CSSProperties}
     >
       {children}
     </div>

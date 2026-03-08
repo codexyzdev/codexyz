@@ -144,10 +144,10 @@ ${message}
   return (
     <section id={id} aria-labelledby="contact-title" className="mt-10">
       <ScrollReveal>
-        <div className="rounded-3xl bg-card/70 backdrop-blur-sm md:backdrop-blur-md ring-1 ring-border/70 shadow-sm p-6 md:p-8">
+        <div className="rounded-3xl glass p-6 md:p-8 glow-border">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <h2 id="contact-title" className="text-xl md:text-2xl font-semibold">
+              <h2 id="contact-title" className="text-xl md:text-2xl font-semibold tracking-tight-enhanced">
                 {t.contact}
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -158,7 +158,7 @@ ${message}
             <div className="flex flex-wrap gap-2">
               <a
                 href={`mailto:${CONTACT.EMAIL}`}
-                className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-xs text-muted-foreground ring-1 ring-border/60 hover:bg-muted/80 transition-colors min-h-11"
+                className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-xs text-muted-foreground ring-1 ring-border/60 hover:bg-accent/50 hover:text-primary transition-all duration-200 min-h-11 hover-lift"
               >
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 {CONTACT.EMAIL}
@@ -167,7 +167,7 @@ ${message}
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-xs text-muted-foreground ring-1 ring-border/60 hover:bg-muted/80 transition-colors min-h-11"
+                className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-xs text-muted-foreground ring-1 ring-border/60 hover:bg-accent/50 hover:text-primary transition-all duration-200 min-h-11 hover-lift"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 WhatsApp
@@ -177,14 +177,14 @@ ${message}
 
           <form className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2" onSubmit={onSubmit} noValidate>
             <label className="flex flex-col gap-2">
-              <span className="text-sm">
+              <span className="text-sm font-medium">
                 {t.name} <span className="text-red-500" aria-hidden="true">*</span>
               </span>
               <Input
                 id="name"
                 name="name"
                 type="text"
-                className={errors.name && touched.has("name") ? "border-red-500 focus-visible:ring-red-500/60" : undefined}
+                className={`input-glow ${errors.name && touched.has("name") ? "border-red-500 focus-visible:ring-red-500/60" : ""}`}
                 placeholder={lang === "en" ? "Your name" : "Tu nombre"}
                 required
                 aria-required="true"
@@ -201,14 +201,14 @@ ${message}
             </label>
 
             <label className="flex flex-col gap-2">
-              <span className="text-sm">
+              <span className="text-sm font-medium">
                 {t.email} <span className="text-red-500" aria-hidden="true">*</span>
               </span>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                className={errors.email && touched.has("email") ? "border-red-500 focus-visible:ring-red-500/60" : undefined}
+                className={`input-glow ${errors.email && touched.has("email") ? "border-red-500 focus-visible:ring-red-500/60" : ""}`}
                 placeholder={lang === "en" ? "youremail@gmail.com" : "tucorreo@gmail.com"}
                 required
                 aria-required="true"
@@ -226,7 +226,7 @@ ${message}
 
             <label className="md:col-span-2 flex flex-col gap-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm">
+                <span className="text-sm font-medium">
                   {t.message} <span className="text-red-500" aria-hidden="true">*</span>
                 </span>
                 <span
@@ -242,7 +242,7 @@ ${message}
               <Textarea
                 id="message"
                 name="message"
-                className={errors.message && touched.has("message") ? "border-red-500 focus-visible:ring-red-500/60 min-h-[140px]" : "min-h-[140px]"}
+                className={`input-glow ${errors.message && touched.has("message") ? "border-red-500 focus-visible:ring-red-500/60 min-h-[140px]" : "min-h-[140px]"}`}
                 placeholder={lang === "en" ? "Tell me about your idea or project" : "Cuéntame sobre tu idea o proyecto"}
                 required
                 aria-required="true"
@@ -263,7 +263,7 @@ ${message}
               <p className="text-xs text-muted-foreground">
                 {t.contactDesc}
               </p>
-              <Button type="submit" className="h-11 rounded-full min-h-11">
+              <Button type="submit" className="h-11 rounded-full min-h-11 hover-lift btn-glow">
                 {t.sendGmail}
               </Button>
             </div>
