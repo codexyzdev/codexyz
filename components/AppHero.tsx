@@ -149,12 +149,12 @@ export default function AppHero({
                   </span>
                 </h1>
 
-                <div className="hero-reveal mt-4 flex items-center gap-3">
-                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full p-0.5 bg-gradient-to-br from-[var(--color-azul)] via-[var(--color-teal)] to-[var(--color-azul)] animate-spin-slow">
+                <div className="hero-reveal mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <div className="relative w-16 h-16 sm:w-16 sm:h-16 shrink-0 rounded-full p-0.5 bg-gradient-to-br from-[var(--color-azul)] via-[var(--color-teal)] to-[var(--color-azul)]">
                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--color-teal)] to-[var(--color-azul)] opacity-50 blur-sm" />
                     <div className="relative w-full h-full rounded-full bg-black/60 overflow-hidden">
                       <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-                        <span className="text-xl sm:text-2xl font-bold text-white">AB</span>
+                        <span className="text-2xl sm:text-2xl font-bold text-white">AB</span>
                       </div>
                     </div>
                   </div>

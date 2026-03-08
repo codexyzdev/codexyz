@@ -161,7 +161,8 @@ ${message}
                 className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-2 text-xs text-muted-foreground ring-1 ring-border/60 hover:bg-accent/50 hover:text-primary transition-all duration-200 min-h-11 hover-lift"
               >
                 <Mail className="h-4 w-4" aria-hidden="true" />
-                {CONTACT.EMAIL}
+                <span className="hidden sm:inline">{CONTACT.EMAIL}</span>
+                <span className="sm:hidden">Email</span>
               </a>
               <a
                 href={waUrl}
