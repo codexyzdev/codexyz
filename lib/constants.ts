@@ -65,7 +65,7 @@ export const IMAGE = {
 
 // Accessibility
 export const A11Y = {
-    MIN_TOUCH_TARGET: 44, // pixels
+    MIN_TOUCH_TARGET: 44 as const, // pixels — React inline style accepts number as px
     SKIP_LINK_ID: "main-content",
 } as const
 

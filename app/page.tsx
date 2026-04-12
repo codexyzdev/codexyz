@@ -9,11 +9,7 @@ import ContactForm from "@/components/ContactForm"
 import type { TechItem } from "@/lib/tech"
 import type { ProjectItem } from "@/lib/projects"
 import type { Lang } from "@/lib/texts"
-// Eliminamos react-icons para la sección de tecnologías; usaremos íconos locales desde /public
-
-// CONTACT_EMAIL movido al componente ContactForm
-
-// technologiesByLang ahora se gestiona desde lib/tech y TechGrid
+import { analytics } from "@/lib/analytics"
 
 const PREF_EVENT = "codexyz:pref"
 
@@ -84,6 +80,7 @@ export default function Home() {
     if (typeof document !== "undefined") {
       document.documentElement.lang = next
     }
+    analytics.languageToggle(next)
     window.dispatchEvent(new Event(PREF_EVENT))
   }
 
@@ -95,6 +92,7 @@ export default function Home() {
     if (typeof document !== "undefined") {
       document.documentElement.classList.toggle("dark", next === "dark")
     }
+    analytics.themeToggle(next)
     window.dispatchEvent(new Event(PREF_EVENT))
   }
 
@@ -133,14 +131,20 @@ export default function Home() {
         }}
       />
 
-      <ProjectsGrid lang={lang} onOpen={(p) => setSelectedProject(p)} />
+      <ProjectsGrid lang={lang} onOpen={(p) => {
+        analytics.projectClick(p.name)
+        setSelectedProject(p)
+      }} />
       <ProjectModal
         project={selectedProject}
         lang={lang}
         onClose={() => setSelectedProject(null)}
         onNavigate={(p) => setSelectedProject(p)}
       />
-      <TechGrid lang={lang} onSelect={(tech) => setSelectedTech(tech)} id="tecnologias" />
+      <TechGrid lang={lang} onSelect={(tech) => {
+        analytics.techClick(tech.name)
+        setSelectedTech(tech)
+      }} id="tecnologias" />
       <TechModal tech={selectedTech} lang={lang} onClose={() => setSelectedTech(null)} />
 
 

@@ -14,7 +14,6 @@ export default function ProjectsGrid({ lang, onOpen }: ProjectsGridProps) {
   const t = texts[lang]
   const featured = projects.find((p) => p.featured) ?? projects[0]
   const rest = projects.filter((p) => p.name !== featured?.name)
-  const currentYear = new Date().getFullYear()
 
   return (
     <section id="proyectos" className="cv-auto mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14 md:py-20">

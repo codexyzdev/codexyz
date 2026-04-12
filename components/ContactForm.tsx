@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import ScrollReveal from "@/components/ScrollReveal"
 import { Mail, MessageCircle } from "lucide-react"
+import { analytics } from "@/lib/analytics"
 
 type ContactFormProps = {
   lang: Lang
@@ -128,15 +129,13 @@ ${message}
 `
 
     // 3. Codificación automática segura
-    // Usamos URLSearchParams para generar la query string válida.
     const params = new URLSearchParams()
     params.set("subject", subject)
     params.set("body", bodyContent.trim())
 
-    // Nota: mailto a veces prefiere %20 sobre el símbolo + para espacios.
-    // .toString() genera '+' para espacios. Hacemos un replace final para máxima compatibilidad.
     const queryString = params.toString().replace(/\+/g, "%20")
 
+    analytics.contactFormSubmit()
     window.location.href = `mailto:${CONTACT.EMAIL}?${queryString}`
   }, [lang, validateField])
   // ---------------------------------------------------------------------------

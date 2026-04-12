@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.NAME}`,
   },
   applicationName: SITE.NAME,
+  alternates: {
+    canonical: SITE.URL,
+  },
   description:
     "Portafolio de Alejandro Baez — Web developer building modern apps with Next.js, React y Supabase.",
   keywords: [
@@ -56,7 +59,7 @@ export const metadata: Metadata = {
     title: SITE.TITLE,
     description:
       "Portafolio de Alejandro Baez — Desarrollo web moderno con Next.js, React y Supabase.",
-    url: "/",
+    url: SITE.URL,
     siteName: SITE.NAME,
     images: [
       {
@@ -110,9 +113,6 @@ const structuredData = {
   jobTitle: "Web Developer",
   description: "Venezuelan web developer specializing in Next.js, React, and Supabase",
   image: `${SITE.URL}/logo.png`,
-  sameAs: [
-    // Add social media profiles when available
-  ],
   knowsAbout: [
     "Next.js",
     "React",

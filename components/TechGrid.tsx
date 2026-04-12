@@ -2,7 +2,6 @@
 import Image from "next/image"
 import { technologiesByLang, TechItem } from "@/lib/tech"
 import { texts, Lang } from "@/lib/texts"
-import { Card } from "@/components/ui/card"
 import ScrollReveal from "@/components/ScrollReveal"
 import { ChevronRight } from "lucide-react"
 
@@ -63,16 +62,12 @@ export default function TechGrid({ lang, onSelect, id }: TechGridProps) {
 
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {items.map((tech) => (
-                  <Card
+                  <button
                     key={tech.key}
-                    role="button"
-                    tabIndex={0}
+                    type="button"
                     onClick={() => onSelect(tech)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") onSelect(tech)
-                    }}
                     aria-label={`Open ${tech.name} info`}
-                    className="group glass-hover cursor-pointer bg-card/70 border-border/40 hover:border-primary/30 hover:bg-card/90 transition-all duration-300 rounded-xl"
+                    className="group text-left w-full glass-hover cursor-pointer bg-card/70 border border-border/40 hover:border-primary/30 hover:bg-card/90 transition-all duration-300 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60"
                   >
                     <div className="p-4">
                       <div className="flex items-center gap-3">
@@ -103,7 +98,7 @@ export default function TechGrid({ lang, onSelect, id }: TechGridProps) {
                         </div>
                       </div>
                     </div>
-                  </Card>
+                  </button>
                 ))}
               </div>
             </ScrollReveal>

@@ -82,6 +82,7 @@ export default function TechModal({ tech, lang, onClose }: TechModalProps) {
       className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center"
     >
       <button
+        type="button"
         aria-label={t.closeModal}
         onClick={onClose}
         className="absolute inset-0 bg-black/40"
