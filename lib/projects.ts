@@ -21,6 +21,40 @@ export type ProjectItem = {
 
 export const projects: ProjectItem[] = [
   {
+    name: "Age Calculator",
+    src: "/age-calculator-app-by-codexyz.vercel.app.png",
+    href: "https://age-calculator-app-by-codexyz.vercel.app",
+    year: 2025,
+    description: {
+      en: "A minimal, animated age calculator that tells you your exact age in years, months, and days. Built with Next.js 16 and deployed on Vercel.",
+      es: "Calculadora de edad mínima y animada que te dice tu edad exacta en años, meses y días. Construida con Next.js 16 y desplegada en Vercel."
+    },
+    role: {
+      en: "Full-stack development",
+      es: "Desarrollo full-stack"
+    },
+    highlights: {
+      en: [
+        "Calculates exact age in years, months, and days",
+        "Client-side form validation with inline error messages",
+        "REST API endpoint for programmatic use",
+        "Rate limiting via Upstash Redis (10 requests/min per IP)",
+        "Smooth animations with Framer Motion",
+        "Dark/Light theme toggle"
+      ],
+      es: [
+        "Calcula edad exacta en años, meses y días",
+        "Validación del lado del cliente con mensajes de error en línea",
+        "Endpoint REST API para uso programático",
+        "Rate limiting via Upstash Redis (10 peticiones/min por IP)",
+        "Animaciones fluidas con Framer Motion",
+        "Toggle de tema oscuro/claro"
+      ]
+    },
+    technologies: ["Next.js 16", "TypeScript", "Tailwind CSS v4", "Framer Motion", "Upstash Redis"],
+    featured: true
+  },
+  {
     name: "DevPulse",
     src: "/devpulse-seven.vercel.app.png",
     href: "https://devpulse-seven.vercel.app/",
