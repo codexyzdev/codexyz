@@ -5,7 +5,7 @@ export const texts = {
     portfolio: "Portfolio",
     heroTitle: "Alejandro Baez",
     heroDesc: "Full‑stack web developer",
-    heroSubtitle: "I build fast, accessible web apps that look incredible.",
+    heroSubtitle: "",
     contactMe: "Start a project",
     seeProjects: "See my work",
     aboutMe: "About me",
