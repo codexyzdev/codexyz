@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import { animate, stagger } from "animejs";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, Terminal } from "lucide-react";
 import { texts, Lang } from "@/lib/texts";
 import { safeDuration } from "@/lib/utils";
 
@@ -49,9 +49,18 @@ export default function Hero({
         </div>
 
         {/* Name */}
-        <h1 className="hero-reveal text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground">
-          {t.heroTitle}
-        </h1>
+        <div className="hero-reveal">
+          <div className="inline-flex items-center gap-3 mb-4">
+            <Terminal className="h-5 w-5 text-primary hidden sm:block" />
+            <span className="text-sm font-mono text-muted-foreground">
+              {lang === "en" ? "// developer" : "// desarrollador"}
+            </span>
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
+            <span className="text-foreground">{t.heroTitle.split(" ")[0]}</span>{" "}
+            <span className="text-gradient">{t.heroTitle.split(" ").slice(1).join(" ")}</span>
+          </h1>
+        </div>
 
         {/* Subtitle */}
         <p className="hero-reveal mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">

@@ -4,8 +4,8 @@ export const texts = {
   en: {
     portfolio: "Portfolio",
     heroTitle: "Alejandro Baez",
-    heroDesc: "Full‑stack web developer from Venezuela",
-    heroSubtitle: "Modern web apps. Clean UX.",
+    heroDesc: "Full‑stack web developer",
+    heroSubtitle: "I build fast, accessible web apps that look incredible.",
     contactMe: "Start a project",
     seeProjects: "See my work",
     aboutMe: "About me",
@@ -41,8 +41,8 @@ export const texts = {
   es: {
     portfolio: "Portafolio",
     heroTitle: "Alejandro Baez",
-    heroDesc: "Desarrollador web full‑stack desde Venezuela",
-    heroSubtitle: "Apps modernas. UX limpia.",
+    heroDesc: "Desarrollador web full‑stack",
+    heroSubtitle: "Construyo apps rápidas, accesibles y que se ven increíbles.",
     contactMe: "Iniciar proyecto",
     seeProjects: "Ver mi trabajo",
     aboutMe: "Sobre mí",
