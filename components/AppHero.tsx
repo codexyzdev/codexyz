@@ -7,26 +7,21 @@ import {
   Sun,
   Moon,
   Mail,
-  Grid3x3,
   ArrowDownRight,
   FolderKanban,
-  Code2,
   Sparkles,
-  Zap,
 } from "lucide-react";
 import { texts, Lang } from "@/lib/texts";
 import { safeDuration } from "@/lib/utils";
-import { A11Y } from "@/lib/constants";
 
 type AppHeroProps = {
-  lang: Lang;
-  theme: "light" | "dark";
-  onToggleTheme: () => void;
-  onToggleLang: () => void;
-  onScrollToProjects: () => void;
-  onScrollToContact: () => void;
-  onScrollToTech: () => void;
-};
+  lang: Lang
+  theme: "light" | "dark"
+  onToggleTheme: () => void
+  onToggleLang: () => void
+  onScrollToProjects: () => void
+  onScrollToContact: () => void
+}
 
 export default function AppHero({
   lang,
@@ -35,7 +30,6 @@ export default function AppHero({
   onToggleLang,
   onScrollToProjects,
   onScrollToContact,
-  onScrollToTech,
 }: AppHeroProps) {
   const t = texts[lang];
   const heroRef = useRef<HTMLDivElement>(null);
@@ -134,115 +128,52 @@ export default function AppHero({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-10 items-start">
-              <div>
-                <p className="hero-reveal text-xs sm:text-sm text-white/85 flex items-center gap-2">
-                  <Sparkles className="h-3.5 w-3.5 text-teal-300" />
-                  {t.heroDesc}
-                </p>
-                <h1 className="hero-reveal mt-3 text-3xl font-semibold tracking-tight-enhanced sm:text-4xl md:text-5xl lg:text-6xl">
-                  <span className="text-white">{t.heroTitle}</span>{" "}
-                  <span className="block mt-2 bg-linear-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-                    {lang === "en"
-                      ? "Modern web apps. Clean UX."
-                      : "Apps modernas. UX limpia."}
-                  </span>
-                </h1>
+            <div>
+              <p className="hero-reveal text-xs sm:text-sm text-white/85 flex items-center gap-2">
+                <Sparkles className="h-3.5 w-3.5 text-teal-300" />
+                {t.heroDesc}
+              </p>
+              <h1 className="hero-reveal mt-3 text-3xl font-semibold tracking-tight-enhanced sm:text-4xl md:text-5xl lg:text-6xl">
+                <span className="text-white">{t.heroTitle}</span>{" "}
+                <span className="block mt-2 bg-linear-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
+                  {t.heroSubtitle}
+                </span>
+              </h1>
 
-                <div className="hero-reveal mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                  <div className="relative w-16 h-16 sm:w-16 sm:h-16 shrink-0 rounded-full p-0.5 bg-gradient-to-br from-[var(--color-azul)] via-[var(--color-teal)] to-[var(--color-azul)]">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--color-teal)] to-[var(--color-azul)] opacity-50 blur-sm" />
-                    <div className="relative w-full h-full rounded-full bg-black/60 overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-                        <span className="text-2xl sm:text-2xl font-bold text-white">AB</span>
-                      </div>
+              <div className="hero-reveal mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="relative w-16 h-16 sm:w-16 sm:h-16 shrink-0 rounded-full p-0.5 bg-gradient-to-br from-[var(--color-azul)] via-[var(--color-teal)] to-[var(--color-azul)]">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--color-teal)] to-[var(--color-azul)] opacity-50 blur-sm" />
+                  <div className="relative w-full h-full rounded-full bg-black/60 overflow-hidden">
+                    <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                      <span className="text-2xl sm:text-2xl font-bold text-white">AB</span>
                     </div>
                   </div>
-                  <p className="text-sm sm:text-base/relaxed text-white/90 line-height-relaxed max-w-xl">
-                    {t.aboutDesc}
-                  </p>
                 </div>
-
-                <div className="hero-reveal mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
-                  <Button
-                    className="w-full sm:w-auto h-11 rounded-full bg-white text-black hover:bg-white/92 shadow-sm transition-all duration-300 min-h-11 hover-lift btn-glow"
-                    onClick={onScrollToContact}
-                    type="button"
-                  >
-                    <Mail className="mr-2 h-4 w-4" />
-                    {t.contactMe}
-                    <ArrowDownRight className="ml-2 h-4 w-4 opacity-70" />
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    className="w-full sm:w-auto h-11 rounded-full border transition-all duration-300 shadow-sm bg-black/25 text-white border-white/25 hover:bg-black/35 dark:bg-white/12 dark:hover:bg-white/18 min-h-11 hover-lift"
-                    onClick={onScrollToProjects}
-                    type="button"
-                  >
-                    <FolderKanban className="mr-2 h-4 w-4" />
-                    {lang === "en" ? "Projects" : "Proyectos"}
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    className="w-full sm:w-auto h-11 rounded-full border transition-all duration-300 shadow-sm bg-black/25 text-white border-white/25 hover:bg-black/35 dark:bg-white/12 dark:hover:bg-white/18 min-h-11 hover-lift"
-                    onClick={onScrollToTech}
-                    type="button"
-                    style={{ minHeight: A11Y.MIN_TOUCH_TARGET }}
-                  >
-                    <Grid3x3 className="mr-2 h-4 w-4" />
-                    {t.seeTech}
-                  </Button>
-                </div>
+                <p className="text-sm sm:text-base/relaxed text-white/90 line-height-relaxed max-w-xl">
+                  {t.aboutDesc}
+                </p>
               </div>
 
-              <div className="hero-reveal hidden lg:block">
-                <div className="w-[320px] rounded-2xl glass p-4 glow-border">
-                  <div className="flex items-center justify-between">
-                    <div className="text-xs text-white/75 font-medium">{lang === "en" ? "Focus" : "Enfoque"}</div>
-                    <Zap className="h-3.5 w-3.5 text-teal-300" />
-                  </div>
-                  <div className="mt-3 grid gap-2.5">
-                    <div className="flex items-center justify-between rounded-xl bg-white/8 px-3 py-2.5 ring-1 ring-white/12 hover:bg-white/12 transition-colors cursor-default">
-                      <div className="flex items-center gap-2">
-                        <Code2 className="h-4 w-4 text-blue-300" />
-                        <span className="text-sm text-white">{lang === "en" ? "Frontend" : "Frontend"}</span>
-                      </div>
-                      <span className="text-xs text-white/70">React · Next.js</span>
-                    </div>
-                    <div className="flex items-center justify-between rounded-xl bg-white/8 px-3 py-2.5 ring-1 ring-white/12 hover:bg-white/12 transition-colors cursor-default">
-                      <div className="flex items-center gap-2">
-                        <Sparkles className="h-4 w-4 text-teal-300" />
-                        <span className="text-sm text-white">{lang === "en" ? "Backend" : "Backend"}</span>
-                      </div>
-                      <span className="text-xs text-white/70">Supabase · APIs</span>
-                    </div>
-                    <div className="flex items-center justify-between rounded-xl bg-white/8 px-3 py-2.5 ring-1 ring-white/12 hover:bg-white/12 transition-colors cursor-default">
-                      <div className="flex items-center gap-2">
-                        <Zap className="h-4 w-4 text-amber-300" />
-                        <span className="text-sm text-white">{lang === "en" ? "UX" : "UX"}</span>
-                      </div>
-                      <span className="text-xs text-white/70">
-                        {lang === "en"
-                          ? "Fast, clear, accessible"
-                          : "Rápida, clara, accesible"}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-4 pt-3 border-t border-white/10">
-                    <div className="flex items-center gap-2 text-xs text-white/60">
-                      <div className="flex -space-x-1.5">
-                        <span className="w-5 h-5 rounded-full bg-emerald-500/80 flex items-center justify-center text-[10px] text-white">N</span>
-                        <span className="w-5 h-5 rounded-full bg-blue-500/80 flex items-center justify-center text-[10px] text-white">T</span>
-                        <span className="w-5 h-5 rounded-full bg-purple-500/80 flex items-center justify-center text-[10px] text-white">S</span>
-                        <span className="w-5 h-5 rounded-full bg-amber-500/80 flex items-center justify-center text-[10px] text-white">Z</span>
-                      </div>
-                      <span>{lang === "en" ? "Tech stack" : "Stack tech"}</span>
-                    </div>
-                  </div>
-                </div>
+              <div className="hero-reveal mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
+                <Button
+                  className="w-full sm:w-auto h-11 rounded-full bg-white text-black hover:bg-white/92 shadow-sm transition-all duration-300 min-h-11 hover-lift btn-glow"
+                  onClick={onScrollToContact}
+                  type="button"
+                >
+                  <Mail className="mr-2 h-4 w-4" />
+                  {t.contactMe}
+                  <ArrowDownRight className="ml-2 h-4 w-4 opacity-70" />
+                </Button>
+
+                <Button
+                  variant="outline"
+                  className="w-full sm:w-auto h-11 rounded-full border transition-all duration-300 shadow-sm bg-black/25 text-white border-white/25 hover:bg-black/35 dark:bg-white/12 dark:hover:bg-white/18 min-h-11 hover-lift"
+                  onClick={onScrollToProjects}
+                  type="button"
+                >
+                  <FolderKanban className="mr-2 h-4 w-4" />
+                  {t.seeProjects}
+                </Button>
               </div>
             </div>
 
@@ -255,7 +186,7 @@ export default function AppHero({
                 {lang === "en" ? "Scroll to work" : "Ver trabajo"}
                 <ArrowDownRight className="h-4 w-4 opacity-70" />
               </button>
-              <span className="text-xs text-white/70">{t.cardDesc}</span>
+              <span className="text-xs text-white/70">{t.heroSubtitle}</span>
             </div>
           </div>
         </div>

@@ -26,8 +26,8 @@ export const projects: ProjectItem[] = [
     href: "https://age-calculator-app-by-codexyz.vercel.app",
     year: 2025,
     description: {
-      en: "A minimal, animated age calculator that tells you your exact age in years, months, and days. Built with Next.js 16 and deployed on Vercel.",
-      es: "Calculadora de edad mínima y animada que te dice tu edad exacta en años, meses y días. Construida con Next.js 16 y desplegada en Vercel."
+      en: "Web application that calculates exact age in years, months, and days. Built with modern stack and deployed on Vercel.",
+      es: "Aplicación web que calcula la edad exacta en años, meses y días. Construida con stack moderno y desplegada en Vercel."
     },
     role: {
       en: "Full-stack development",
@@ -35,23 +35,17 @@ export const projects: ProjectItem[] = [
     },
     highlights: {
       en: [
-        "Calculates exact age in years, months, and days",
-        "Client-side form validation with inline error messages",
-        "REST API endpoint for programmatic use",
-        "Rate limiting via Upstash Redis (10 requests/min per IP)",
-        "Smooth animations with Framer Motion",
-        "Dark/Light theme toggle"
+        "Accurate age calculation with instant results",
+        "Clean, intuitive user interface",
+        "Fast performance and responsive design",
       ],
       es: [
-        "Calcula edad exacta en años, meses y días",
-        "Validación del lado del cliente con mensajes de error en línea",
-        "Endpoint REST API para uso programático",
-        "Rate limiting via Upstash Redis (10 peticiones/min por IP)",
-        "Animaciones fluidas con Framer Motion",
-        "Toggle de tema oscuro/claro"
+        "Cálculo preciso de edad con resultados instantáneos",
+        "Interfaz limpia e intuitiva",
+        "Rendimiento rápido y diseño responsive",
       ]
     },
-    technologies: ["Next.js 16", "TypeScript", "Tailwind CSS v4", "Framer Motion", "Upstash Redis"],
+    technologies: ["Next.js 16", "TypeScript", "Tailwind CSS v4"],
     featured: true
   },
   {
@@ -60,8 +54,8 @@ export const projects: ProjectItem[] = [
     href: "https://devpulse-seven.vercel.app/",
     year: 2025,
     description: {
-      en: "Smart Pomodoro timer designed specifically for developers with AI-powered focus assistance",
-      es: "Temporizador Pomodoro inteligente diseñado específicamente para desarrolladores con asistencia de IA"
+      en: "Smart productivity timer designed for deep work sessions. Helps developers stay focused and track their work habits.",
+      es: "Temporizador de productividad inteligente diseñado para sesiones de trabajo profundo. Ayuda a los desarrolladores a mantenerse enfocados."
     },
     role: {
       en: "Product + UI development",
@@ -69,26 +63,26 @@ export const projects: ProjectItem[] = [
     },
     highlights: {
       en: [
-        "Pomodoro flow tailored for deep work",
-        "Focus assistance concept built for developers",
-        "Responsive, keyboard-friendly interface",
+        "Tailored flow for focused work sessions",
+        "Keyboard-friendly interface for quick interactions",
+        "Responsive design that works everywhere",
       ],
       es: [
-        "Flujo Pomodoro pensado para trabajo profundo",
-        "Concepto de asistencia de enfoque para devs",
-        "Interfaz responsive y usable con teclado",
+        "Flujo personalizado para sesiones de trabajo enfocado",
+        "Interfaz amigable con teclado para interacciones rápidas",
+        "Diseño responsive que funciona en cualquier dispositivo",
       ],
     },
     technologies: ["Next.js", "React", "TypeScript", "Supabase"],
     featured: true,
   },
-{
+  {
     name: "Los Tiburones",
     src: "/los-tiburones.png",
     year: 2024,
     description: {
-      en: "Business website with modern design and responsive layout",
-      es: "Sitio web empresarial con diseño moderno y diseño responsive"
+      en: "Business website with modern design that strengthened the brand's digital presence. Clean layout and professional visual identity.",
+      es: "Sitio web empresarial con diseño moderno que fortaleció la presencia digital de la marca. Layout limpio e identidad visual profesional."
     },
     role: {
       en: "Frontend development",
@@ -97,22 +91,22 @@ export const projects: ProjectItem[] = [
     highlights: {
       en: [
         "Responsive layout for mobile and desktop",
-        "Clean information hierarchy and branding",
+        "Professional branding and visual hierarchy",
       ],
       es: [
-        "Layout responsive para móvil y desktop",
-        "Jerarquía visual clara y branding consistente",
+        "Layout responsive para móvil y escritorio",
+        "Branding profesional y jerarquía visual",
       ],
     },
     technologies: ["Next.js", "React", "Tailwind CSS"],
   },
-{
+  {
     name: "Financiamientos",
     src: "/financiamientos.png",
     year: 2024,
     description: {
-      en: "Financial services platform with intuitive user interface",
-      es: "Plataforma de servicios financieros con interfaz de usuario intuitiva"
+      en: "Financial services platform with intuitive interface. Built to inspire trust and simplify complex financial information.",
+      es: "Plataforma de servicios financieros con interfaz intuitiva. Diseñada para inspirar confianza y simplificar información financiera compleja."
     },
     role: {
       en: "Frontend development",
@@ -120,24 +114,24 @@ export const projects: ProjectItem[] = [
     },
     highlights: {
       en: [
-        "UX focused on clarity and trust",
-        "Responsive UI and consistent components",
+        "UX focused on clarity and user trust",
+        "Consistent components across the platform",
       ],
       es: [
-        "UX enfocada en claridad y confianza",
-        "UI responsive y componentes consistentes",
+        "UX enfocada en claridad y confianza del usuario",
+        "Componentes consistentes en toda la plataforma",
       ],
     },
     technologies: ["Next.js", "React", "TypeScript"],
   },
-{
+  {
     name: "Chess Clock",
     src: "/chess-clock.png",
     href: "https://chess-clock-by-codexyzdev.vercel.app/",
     year: 2024,
     description: {
-      en: "Professional chess timer with multiple time control modes",
-      es: "Temporizador de ajedrez profesional con múltiples modos de control de tiempo"
+      en: "Professional chess timer with multiple time control modes. Optimized for quick interactions during gameplay.",
+      es: "Temporizador de ajedrez profesional con múltiples modos de control de tiempo. Optimizado para interacciones rápidas durante el juego."
     },
     role: {
       en: "Frontend + interaction design",
@@ -145,24 +139,24 @@ export const projects: ProjectItem[] = [
     },
     highlights: {
       en: [
-        "Timer interface optimized for quick interactions",
-        "Responsive layout for mobile play",
+        "Interface optimized for fast, intuitive interactions",
+        "Mobile-first responsive layout",
       ],
       es: [
-        "Interfaz optimizada para interacciones rápidas",
-        "Layout responsive para jugar desde el móvil",
+        "Interfaz optimizada para interacciones rápidas e intuitivas",
+        "Layout responsive mobile-first",
       ],
     },
     technologies: ["Next.js", "React", "Tailwind CSS"],
   },
-{
+  {
     name: "Ahorro Compartido 2026",
     src: "/ahorro-compartido-2026.vercel.app.png",
     href: "https://ahorro-compartido-2026.vercel.app/",
     year: 2025,
     description: {
-      en: "Couples savings challenge app with a dashboard, deposits, and envelope board for 2026 goals",
-      es: "App de reto de ahorro para parejas con tablero, aportes y sobres para objetivos de 2026"
+      en: "Couples savings challenge app with dashboard, deposits tracking, and envelope board for 2026 goals. Makes saving fun and visual.",
+      es: "App de reto de ahorro para parejas con tablero, seguimiento de aportes y sobres para objetivos de 2026. Hace el ahorro divertido y visual."
     },
     role: {
       en: "Product + UI development",
@@ -170,14 +164,14 @@ export const projects: ProjectItem[] = [
     },
     highlights: {
       en: [
-        "Savings dashboard with progress and remaining days",
-        "Envelope-style board for tracking deposits",
-        "Mobile-first UI with clear visual hierarchy",
+        "Savings dashboard with progress tracking",
+        "Visual envelope board for goal management",
+        "Mobile-first UI with clear hierarchy",
       ],
       es: [
-        "Tablero de ahorro con progreso y días restantes",
-        "Tablero de sobres para registrar y seguir aportes",
-        "UI mobile-first con jerarquía visual clara",
+        "Tablero de ahorro con seguimiento de progreso",
+        "Tablero visual de sobres para gestión de objetivos",
+        "UI mobile-first con jerarquía clara",
       ],
     },
     technologies: ["Next.js", "React", "Tailwind CSS", "Lucide", "Vercel"],

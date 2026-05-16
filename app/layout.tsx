@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     canonical: SITE.URL,
   },
   description:
-    "Portafolio de Alejandro Baez — Web developer building modern apps with Next.js, React y Supabase.",
+    "Desarrollador web especializado en Next.js, React y Supabase. Creo aplicaciones rápidas, accesibles y mantenibles para empresas y emprendedores.",
   keywords: [
     // Español
     "Alejandro Baez",
@@ -36,6 +36,8 @@ export const metadata: Metadata = {
     "TypeScript",
     "Supabase",
     "Tailwind CSS",
+    "aplicaciones web",
+    "desarrollo web moderno",
     // English
     "web developer",
     "portfolio",
@@ -44,6 +46,7 @@ export const metadata: Metadata = {
     "backend",
     "Venezuela",
     "full-stack developer",
+    "modern web apps",
   ],
   authors: [{ name: SITE.AUTHOR }],
   creator: SITE.AUTHOR,
@@ -58,7 +61,7 @@ export const metadata: Metadata = {
     type: "website",
     title: SITE.TITLE,
     description:
-      "Portafolio de Alejandro Baez — Desarrollo web moderno con Next.js, React y Supabase.",
+      "Desarrollador web especializado en Next.js, React y Supabase. Creo aplicaciones rápidas, accesibles y mantenibles.",
     url: SITE.URL,
     siteName: SITE.NAME,
     images: [
@@ -75,7 +78,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE.TITLE,
     description:
-      "Portafolio de Alejandro Baez — Desarrollo web moderno con Next.js, React y Supabase.",
+      "Desarrollador web especializado en Next.js, React y Supabase. Creo aplicaciones rápidas, accesibles y mantenibles.",
     images: ["/logo.png"],
   },
   robots: {
@@ -111,7 +114,7 @@ const structuredData = {
   name: SITE.AUTHOR,
   url: SITE.URL,
   jobTitle: "Web Developer",
-  description: "Venezuelan web developer specializing in Next.js, React, and Supabase",
+  description: "Desarrollador web especializado en Next.js, React y Supabase. Creo aplicaciones rápidas, accesibles y mantenibles.",
   image: `${SITE.URL}/logo.png`,
   knowsAbout: [
     "Next.js",

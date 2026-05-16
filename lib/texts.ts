@@ -4,22 +4,19 @@ export const texts = {
   en: {
     portfolio: "Portfolio",
     heroTitle: "Alejandro Baez",
-    heroDesc:
-      "Full‑stack web developer from Venezuela",
+    heroDesc: "Full‑stack web developer from Venezuela",
+    heroSubtitle: "Modern web apps. Clean UX.",
     contactMe: "Start a project",
-    seeTech: "See stack",
-    technologies: "Technologies",
-    techDesc: "Tools I use to ship production apps.",
-    cardDesc: "Design → build → ship. Clean, scalable, maintainable.",
+    seeProjects: "See my work",
     aboutMe: "About me",
     aboutDesc:
-      "I build fast, accessible web apps with Next.js + React, backed by Supabase. I care about clean UX, performance, and maintainable code.",
+      "I help businesses and entrepreneurs make the digital leap with modern, efficient, and easy-to-maintain web applications. I turn your vision into digital reality: functional platforms, secure and optimized for the best customer experience. I handle the structure and code so you can focus on growing your business.",
     projects: "Projects",
     projectsDesc: "Selected work: apps, sites, and experiments.",
     contact: "Contact",
     contactDesc:
       "This form opens your email client with a ready‑to‑send message. Prefer WhatsApp? Use the button.",
-    contactSub: "Let’s build something that feels great to use.",
+    contactSub: "Let's build something that feels great to use.",
     name: "Name",
     email: "Email",
     message: "Message",
@@ -42,16 +39,13 @@ export const texts = {
   es: {
     portfolio: "Portafolio",
     heroTitle: "Alejandro Baez",
-    heroDesc:
-      "Desarrollador web full‑stack desde Venezuela",
+    heroDesc: "Desarrollador web full‑stack desde Venezuela",
+    heroSubtitle: "Apps modernas. UX limpia.",
     contactMe: "Iniciar proyecto",
-    seeTech: "Ver stack",
-    technologies: "Tecnologías",
-    techDesc: "Herramientas que uso para shippear apps reales.",
-    cardDesc: "Diseño → desarrollo → deploy. Sin drama.",
+    seeProjects: "Ver mi trabajo",
     aboutMe: "Sobre mí",
     aboutDesc:
-      "Construyo apps rápidas y accesibles con Next.js + React y backend con Supabase. Me enfoco en UX clara, performance y código mantenible.",
+      "Ayudo a empresas y emprendedores a dar el salto digital con aplicaciones web modernas, eficientes y fáciles de mantener. Convierto tu visión en una realidad digital: plataformas funcionales, seguras y optimizadas para la mejor experiencia de tus clientes. Me encargo de la estructura y el código para que te concentres en hacer crecer tu negocio.",
     projects: "Proyectos",
     projectsDesc: "Selección de trabajos: apps, sitios y experimentos.",
     contact: "Contacto",

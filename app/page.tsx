@@ -1,12 +1,9 @@
 "use client"
 import { useEffect, useState, useSyncExternalStore } from "react"
 import AppHero from "@/components/AppHero"
-import TechGrid from "@/components/TechGrid"
-import TechModal from "@/components/TechModal"
 import ProjectsGrid from "@/components/ProjectsGrid"
 import ProjectModal from "@/components/ProjectModal"
 import ContactForm from "@/components/ContactForm"
-import type { TechItem } from "@/lib/tech"
 import type { ProjectItem } from "@/lib/projects"
 import type { Lang } from "@/lib/texts"
 import { analytics } from "@/lib/analytics"
@@ -55,7 +52,6 @@ export default function Home() {
     getThemeSnapshot,
     () => "light"
   )
-  const [selectedTech, setSelectedTech] = useState<TechItem | null>(null)
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null)
 
   // Los textos por idioma se gestionan ahora en lib/texts y dentro de los componentes
@@ -100,7 +96,6 @@ export default function Home() {
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setSelectedTech(null)
         setSelectedProject(null)
       }
     }
@@ -125,10 +120,6 @@ export default function Home() {
           const section = document.getElementById("contacto")
           section?.scrollIntoView({ behavior: "smooth" })
         }}
-        onScrollToTech={() => {
-          const section = document.getElementById("tecnologias")
-          section?.scrollIntoView({ behavior: "smooth" })
-        }}
       />
 
       <ProjectsGrid lang={lang} onOpen={(p) => {
@@ -141,11 +132,6 @@ export default function Home() {
         onClose={() => setSelectedProject(null)}
         onNavigate={(p) => setSelectedProject(p)}
       />
-      <TechGrid lang={lang} onSelect={(tech) => {
-        analytics.techClick(tech.name)
-        setSelectedTech(tech)
-      }} id="tecnologias" />
-      <TechModal tech={selectedTech} lang={lang} onClose={() => setSelectedTech(null)} />
 
 
       <section className="cv-auto mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14 md:py-20">
