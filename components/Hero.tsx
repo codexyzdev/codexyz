@@ -2,9 +2,10 @@
 import { useEffect, useRef } from "react";
 import { animate, stagger } from "animejs";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown, Terminal } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { texts, Lang } from "@/lib/texts";
 import { safeDuration } from "@/lib/utils";
+import TerminalIcon from "@/components/TerminalIcon";
 
 type HeroProps = {
   lang: Lang;
@@ -51,7 +52,9 @@ export default function Hero({
         {/* Name */}
         <div className="hero-reveal">
           <div className="inline-flex items-center gap-3 mb-4">
-            <Terminal className="h-5 w-5 text-primary hidden sm:block" />
+            <span className="hidden sm:block">
+              <TerminalIcon />
+            </span>
             <span className="text-sm font-mono text-muted-foreground">
               {lang === "en" ? "// developer" : "// desarrollador"}
             </span>
@@ -65,11 +68,6 @@ export default function Hero({
         {/* Subtitle */}
         <p className="hero-reveal mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           {t.heroDesc}
-        </p>
-
-        {/* Description */}
-        <p className="hero-reveal mt-4 text-base text-muted-foreground/80 max-w-xl mx-auto">
-          {t.heroSubtitle}
         </p>
 
         {/* CTAs */}
