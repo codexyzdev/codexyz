@@ -42,7 +42,7 @@ export const texts = {
     portfolio: "Portafolio",
     heroTitle: "Alejandro Baez",
     heroDesc: "Desarrollador web full‑stack",
-    heroSubtitle: "Construyo apps rápidas, accesibles y que se ven increíbles.",
+    heroSubtitle: "",
     contactMe: "Iniciar proyecto",
     seeProjects: "Ver mi trabajo",
     aboutMe: "Sobre mí",
