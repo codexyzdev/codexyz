@@ -45,14 +45,14 @@ export default function Hero({
       <div ref={heroRef} className="max-w-4xl mx-auto text-center">
         {/* Badge */}
         <div className="hero-reveal inline-flex items-center gap-2 badge mb-8">
-          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
           {lang === "en" ? "Open to projects" : "Disponible para proyectos"}
         </div>
 
         {/* Name */}
         <div className="hero-reveal">
           <div className="inline-flex items-center gap-3 mb-4">
-            <span className="hidden sm:block">
+            <span>
               <TerminalIcon />
             </span>
             <span className="text-sm font-mono text-muted-foreground">
