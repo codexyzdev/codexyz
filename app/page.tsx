@@ -1,9 +1,12 @@
 "use client"
 import { useEffect, useState, useSyncExternalStore } from "react"
-import AppHero from "@/components/AppHero"
-import ProjectsGrid from "@/components/ProjectsGrid"
+import Header from "@/components/Header"
+import Hero from "@/components/Hero"
+import About from "@/components/About"
+import Projects from "@/components/Projects"
 import ProjectModal from "@/components/ProjectModal"
-import ContactForm from "@/components/ContactForm"
+import Contact from "@/components/Contact"
+import Footer from "@/components/Footer"
 import type { ProjectItem } from "@/lib/projects"
 import type { Lang } from "@/lib/texts"
 import { analytics } from "@/lib/analytics"
@@ -54,8 +57,6 @@ export default function Home() {
   )
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null)
 
-  // Los textos por idioma se gestionan ahora en lib/texts y dentro de los componentes
-
   useEffect(() => {
     if (typeof document !== "undefined") {
       document.documentElement.classList.toggle("dark", theme === "dark")
@@ -92,7 +93,6 @@ export default function Home() {
     window.dispatchEvent(new Event(PREF_EVENT))
   }
 
-  // Cierra la modal con Escape para mejorar la accesibilidad
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -103,40 +103,54 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [])
 
-  // Envío del formulario ahora es manejado dentro de ContactForm
+  const scrollToProjects = () => {
+    document.getElementById("proyectos")?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const scrollToContact = () => {
+    document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })
+  }
 
   return (
-    <div className="min-h-svh">
-      <AppHero
+    <div className="min-h-screen pt-14">
+      <Header
         lang={lang}
         theme={theme}
         onToggleTheme={toggleTheme}
         onToggleLang={toggleLang}
-        onScrollToProjects={() => {
-          const section = document.getElementById("proyectos")
-          section?.scrollIntoView({ behavior: "smooth" })
-        }}
-        onScrollToContact={() => {
-          const section = document.getElementById("contacto")
-          section?.scrollIntoView({ behavior: "smooth" })
-        }}
+        onScrollToProjects={scrollToProjects}
+        onScrollToContact={scrollToContact}
       />
 
-      <ProjectsGrid lang={lang} onOpen={(p) => {
-        analytics.projectClick(p.name)
-        setSelectedProject(p)
-      }} />
+      <main>
+        <Hero
+          lang={lang}
+          onScrollToProjects={scrollToProjects}
+          onScrollToContact={scrollToContact}
+        />
+
+        <About lang={lang} id="sobre-mi" />
+
+        <Projects
+          lang={lang}
+          onOpen={(p) => {
+            analytics.projectClick(p.name)
+            setSelectedProject(p)
+          }}
+          id="proyectos"
+        />
+
+        <Contact lang={lang} id="contacto" />
+      </main>
+
+      <Footer lang={lang} />
+
       <ProjectModal
         project={selectedProject}
         lang={lang}
         onClose={() => setSelectedProject(null)}
         onNavigate={(p) => setSelectedProject(p)}
       />
-
-
-      <section className="cv-auto mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14 md:py-20">
-        <ContactForm lang={lang} id="contacto" />
-      </section>
     </div>
   )
 }

@@ -10,13 +10,15 @@ export const texts = {
     seeProjects: "See my work",
     aboutMe: "About me",
     aboutDesc:
-      "I help businesses and entrepreneurs make the digital leap with modern, efficient, and easy-to-maintain web applications. I turn your vision into digital reality: functional platforms, secure and optimized for the best customer experience. I handle the structure and code so you can focus on growing your business.",
+      "I help businesses and entrepreneurs make the digital leap with modern, efficient, and easy-to-maintain web applications.",
+    aboutDetail:
+      "I turn your vision into digital reality: functional platforms, secure and optimized for the best customer experience. I handle the structure and code so you can focus on growing your business.",
     projects: "Projects",
-    projectsDesc: "Selected work: apps, sites, and experiments.",
+    projectsDesc: "apps, sites, and experiments.",
     contact: "Contact",
     contactDesc:
-      "This form opens your email client with a ready‑to‑send message. Prefer WhatsApp? Use the button.",
-    contactSub: "Let's build something that feels great to use.",
+      "Send me a message and I'll get back to you as soon as possible.",
+    contactSub: "Let's talk about your project.",
     name: "Name",
     email: "Email",
     message: "Message",
@@ -45,13 +47,15 @@ export const texts = {
     seeProjects: "Ver mi trabajo",
     aboutMe: "Sobre mí",
     aboutDesc:
-      "Ayudo a empresas y emprendedores a dar el salto digital con aplicaciones web modernas, eficientes y fáciles de mantener. Convierto tu visión en una realidad digital: plataformas funcionales, seguras y optimizadas para la mejor experiencia de tus clientes. Me encargo de la estructura y el código para que te concentres en hacer crecer tu negocio.",
+      "Ayudo a empresas y emprendedores a dar el salto digital con aplicaciones web modernas, eficientes y fáciles de mantener.",
+    aboutDetail:
+      "Convierto tu visión en una realidad digital: plataformas funcionales, seguras y optimizadas para la mejor experiencia de tus clientes. Me encargo de la estructura y el código para que te concentres en hacer crecer tu negocio.",
     projects: "Proyectos",
-    projectsDesc: "Selección de trabajos: apps, sitios y experimentos.",
+    projectsDesc: "apps, sitios y experimentos.",
     contact: "Contacto",
     contactDesc:
-      "El formulario abre tu cliente de correo con el mensaje listo. Si prefieres WhatsApp, usa el botón.",
-    contactSub: "Hablemos y lo aterrizamos en algo real.",
+      "Envíame un mensaje y te respondo lo antes posible.",
+    contactSub: "Hablemos de tu proyecto.",
     name: "Nombre",
     email: "Email",
     message: "Mensaje",
