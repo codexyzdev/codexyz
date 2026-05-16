@@ -7,8 +7,8 @@ export const CONTACT = {
     EMAIL: "alejandrobaez938@gmail.com",
     WHATSAPP: "+584125146317",
     WHATSAPP_MESSAGE: {
-        en: "Hi Alejandro! 👋 I loved your portfolio and would like to discuss a project. Do you have time to chat?",
-        es: "¡Hola Alejandro! 👋 Me encantó tu portafolio y me gustaría conversar sobre un proyecto. ¿Tienes tiempo para hablar?",
+        en: "Hi Alejandro! I came across your portfolio and I'm interested in working together on a project. Are you available to chat?",
+        es: "¡Hola Alejandro! Vi tu portafolio y me gustaría trabajar contigo en un proyecto. ¿Tienes disponibilidad para conversar?",
     },
 } as const
 

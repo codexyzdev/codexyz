@@ -78,12 +78,12 @@ export default function Contact({ lang, id }: ContactProps) {
     }
 
     const subject = lang === "en"
-      ? `Portfolio Inquiry: ${name}`
-      : `Contacto Portafolio: ${name}`
+      ? `Project Inquiry from ${name}`
+      : `Consulta de proyecto de ${name}`
 
     const bodyContent = lang === "en"
-      ? `Hi Alejandro,\n\n${name} (${email}) wants to discuss a project.\n\n${message}`
-      : `Hola Alejandro,\n\n${name} (${email}) quiere conversar sobre un proyecto.\n\n${message}`
+      ? `Hi Alejandro,\n\nMy name is ${name} and I'd like to discuss a project with you.\n\n${message}\n\nBest regards,\n${name}\n${email}`
+      : `Hola Alejandro,\n\nMi nombre es ${name} y me gustaría conversar sobre un proyecto contigo.\n\n${message}\n\nSaludos,\n${name}\n${email}`
 
     const params = new URLSearchParams()
     params.set("subject", subject)

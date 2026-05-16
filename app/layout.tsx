@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { IoLogoWhatsapp } from "react-icons/io";
 import { Geist, Geist_Mono } from "next/font/google";
 import { CONTACT, SITE } from "@/lib/constants";
 import "./globals.css";
@@ -138,10 +137,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const waText = encodeURIComponent(CONTACT.WHATSAPP_MESSAGE.es);
-  const waNumber = CONTACT.WHATSAPP.replace(/\D/g, "");
-  const waUrl = `https://wa.me/${waNumber}?text=${waText}`;
-
   return (
     <html lang="es">
       <head>
@@ -164,17 +159,6 @@ export default function RootLayout({
         <main id="main-content">
           {children}
         </main>
-
-        {/* WhatsApp floating button */}
-        <a
-          href={waUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Contactar por WhatsApp"
-          className="fixed bottom-4 right-4 z-50 inline-flex items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg hover:bg-emerald-600 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 h-12 w-12 min-h-11 min-w-11"
-        >
-          <IoLogoWhatsapp size={24} />
-        </a>
       </body>
     </html>
   );
