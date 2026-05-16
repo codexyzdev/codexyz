@@ -56,7 +56,7 @@ export default function Hero({
               <TerminalIcon />
             </span>
             <span className="text-sm font-mono text-muted-foreground">
-              {lang === "en" ? "// developer" : "// desarrollador"}
+              {t.heroDesc}
             </span>
           </div>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
@@ -64,11 +64,6 @@ export default function Hero({
             <span className="text-gradient">{t.heroTitle.split(" ").slice(1).join(" ")}</span>
           </h1>
         </div>
-
-        {/* Subtitle */}
-        <p className="hero-reveal mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          {t.heroDesc}
-        </p>
 
         {/* CTAs */}
         <div className="hero-reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
