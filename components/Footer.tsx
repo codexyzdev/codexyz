@@ -1,5 +1,7 @@
 "use client"
 import { Lang } from "@/lib/texts"
+import { SOCIAL } from "@/lib/constants"
+import { Github } from "lucide-react"
 
 type FooterProps = {
   lang: Lang
@@ -15,9 +17,21 @@ export default function Footer({ lang }: FooterProps) {
           <p className="text-sm text-muted-foreground">
             © {year} Alejandro Baez
           </p>
-          <p className="text-sm text-muted-foreground">
-            codexyz.dev
-          </p>
+          
+          <div className="flex items-center gap-4">
+            <a
+              href={SOCIAL.GITHUB}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+            <span className="text-sm text-muted-foreground">
+              codexyz.dev
+            </span>
+          </div>
         </div>
       </div>
     </footer>

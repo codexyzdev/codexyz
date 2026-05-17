@@ -69,9 +69,9 @@ export const A11Y = {
     SKIP_LINK_ID: "main-content",
 } as const
 
-// Social Links (prepared for future use)
+// Social Links
 export const SOCIAL = {
-    GITHUB: "",
+    GITHUB: "https://github.com/codexyzdev",
     LINKEDIN: "",
     TWITTER: "",
 } as const
