@@ -65,52 +65,66 @@ export default function ProjectModal({
         ref={dialogRef}
       >
         {/* Header */}
-        <div className="flex shrink-0 items-center justify-between gap-4 px-6 py-5 border-b border-border">
-          <div className="min-w-0 flex-1">
-            <h3
-              id="project-dialog-title"
-              className="text-xl font-semibold text-foreground"
-            >
-              {project.name}
-            </h3>
-            <div className="flex items-center gap-3 mt-2 text-sm text-muted-foreground">
-              {project.role?.[lang] && (
-                <span className="inline-flex items-center gap-1.5">
-                  <Briefcase className="h-3.5 w-3.5" />
-                  {project.role[lang]}
-                </span>
+        <div className="shrink-0 border-b border-border px-4 py-4 sm:px-6 sm:py-5">
+          <div className="flex items-start sm:items-center justify-between gap-3 sm:gap-4">
+            <div className="min-w-0 flex-1">
+              <h3
+                id="project-dialog-title"
+                className="text-lg sm:text-xl font-semibold text-foreground"
+              >
+                {project.name}
+              </h3>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 sm:mt-2 text-xs sm:text-sm text-muted-foreground">
+                {project.role?.[lang] && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <Briefcase className="h-3.5 w-3.5" />
+                    {project.role[lang]}
+                  </span>
+                )}
+                {project.year && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5" />
+                    {project.year}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              {project.href && (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center gap-2 h-10 px-5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+                >
+                  {lang === "en" ? "View Live" : "Ver en vivo"}
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </a>
               )}
-              {project.year && (
-                <span className="inline-flex items-center gap-1.5">
-                  <Calendar className="h-3.5 w-3.5" />
-                  {project.year}
-                </span>
-              )}
+              <button
+                ref={closeBtnRef}
+                type="button"
+                className="inline-flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                onClick={onClose}
+                aria-label={lang === "en" ? "Close" : "Cerrar"}
+              >
+                <X className="h-5 w-5" />
+              </button>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
-            {project.href && (
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
-              >
-                {lang === "en" ? "View Live" : "Ver en vivo"}
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </a>
-            )}
-            <button
-              ref={closeBtnRef}
-              type="button"
-              className="inline-flex items-center justify-center h-10 w-10 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              onClick={onClose}
-              aria-label={lang === "en" ? "Close" : "Cerrar"}
+          {project.href && (
+            <a
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sm:hidden mt-3 inline-flex items-center gap-2 h-9 px-4 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
             >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
+              {lang === "en" ? "View Live" : "Ver en vivo"}
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </a>
+          )}
         </div>
 
         {/* Content */}
