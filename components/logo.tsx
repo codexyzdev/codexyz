@@ -38,14 +38,13 @@ const SVGComponent = (props: React.SVGProps<SVGSVGElement>) => {
     group.setAttribute("clip-path", "url(#letters-clip)")
     animate(rect, { width: [0, bbox.width], duration: 1500, ease: "easeInOutQuad" })
 
-    let timeoutId: ReturnType<typeof setTimeout>
     const loop = () => {
       createTimeline()
         .add(circuits, { opacity: [0, 1], duration: 700, ease: "easeOutQuad", delay: stagger(40) })
         .add(accents, { opacity: [0, 1], duration: 1000, ease: "easeOutQuad", delay: stagger(50) }, "-=500")
     }
     const interval = setInterval(loop, 6000)
-    timeoutId = setTimeout(loop, 3000)
+    const timeoutId = setTimeout(loop, 3000)
     return () => {
       clearInterval(interval)
       clearTimeout(timeoutId)

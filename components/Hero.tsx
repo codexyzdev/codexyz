@@ -93,7 +93,7 @@ export default function Hero({
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors"
         aria-label={lang === "en" ? "Scroll to projects" : "Ir a proyectos"}
       >
-        <ChevronDown className="h-6 w-6 animate-bounce" />
+        <ChevronDown className="h-6 w-6 motion-safe:animate-bounce" />
       </button>
     </section>
   );

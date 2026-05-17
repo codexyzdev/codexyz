@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Sun, Moon, Menu, X } from "lucide-react"
 import { texts, Lang } from "@/lib/texts"
@@ -24,11 +24,48 @@ export default function Header({
 }: HeaderProps) {
   const t = texts[lang]
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const handleNavClick = (action: () => void) => {
     setIsMobileMenuOpen(false)
     action()
   }
+
+  const trapMenuFocus = useCallback((e: KeyboardEvent) => {
+    if (e.key !== "Tab" || !menuRef.current) return
+
+    const focusable = menuRef.current.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+    )
+    if (focusable.length === 0) return
+
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+
+    function handleKeydown(e: KeyboardEvent) {
+      if (e.key === "Escape") setIsMobileMenuOpen(false)
+      trapMenuFocus(e)
+    }
+
+    document.addEventListener("keydown", handleKeydown)
+    return () => document.removeEventListener("keydown", handleKeydown)
+  }, [isMobileMenuOpen, trapMenuFocus])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
@@ -99,6 +136,7 @@ export default function Header({
               className="h-9 w-9 rounded-full sm:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
                 <X className="h-4 w-4" />
@@ -112,7 +150,7 @@ export default function Header({
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="sm:hidden border-t border-border bg-background">
+        <div ref={menuRef} className="sm:hidden border-t border-border bg-background">
           <nav className="flex flex-col p-2 gap-1">
             <button
               type="button"

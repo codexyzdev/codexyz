@@ -7,8 +7,7 @@ export function Card({ className, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        "rounded-xl border border-neutral-200 bg-white text-neutral-900 shadow-sm",
-        "dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100",
+        "rounded-xl border border-border bg-card text-card-foreground shadow-sm",
         className
       )}
       {...props}
@@ -40,7 +39,7 @@ export function CardTitle({ className, ...props }: CardProps) {
 export function CardDescription({ className, ...props }: CardProps) {
   return (
     <p
-      className={cn("text-sm text-neutral-600 dark:text-neutral-400", className)}
+      className={cn("text-sm text-muted-foreground", className)}
       {...props}
     />
   )

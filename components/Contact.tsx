@@ -125,11 +125,12 @@ export default function Contact({ lang, id }: ContactProps) {
                 required
                 aria-required="true"
                 aria-invalid={errors.name && touched.has("name") ? "true" : "false"}
+                aria-describedby={errors.name && touched.has("name") ? "error-name" : undefined}
                 onBlur={handleBlur}
                 onChange={handleChange}
               />
               {errors.name && touched.has("name") && (
-                <p className="mt-1.5 text-sm text-destructive" role="alert">
+                <p id="error-name" className="mt-1.5 text-sm text-destructive" role="alert">
                   {errors.name}
                 </p>
               )}
@@ -148,11 +149,12 @@ export default function Contact({ lang, id }: ContactProps) {
                 required
                 aria-required="true"
                 aria-invalid={errors.email && touched.has("email") ? "true" : "false"}
+                aria-describedby={errors.email && touched.has("email") ? "error-email" : undefined}
                 onBlur={handleBlur}
                 onChange={handleChange}
               />
               {errors.email && touched.has("email") && (
-                <p className="mt-1.5 text-sm text-destructive" role="alert">
+                <p id="error-email" className="mt-1.5 text-sm text-destructive" role="alert">
                   {errors.email}
                 </p>
               )}
@@ -170,11 +172,12 @@ export default function Contact({ lang, id }: ContactProps) {
                 required
                 aria-required="true"
                 aria-invalid={errors.message && touched.has("message") ? "true" : "false"}
+                aria-describedby={errors.message && touched.has("message") ? "error-message" : undefined}
                 onBlur={handleBlur}
                 onChange={handleChange}
               />
               {errors.message && touched.has("message") && (
-                <p className="mt-1.5 text-sm text-destructive" role="alert">
+                <p id="error-message" className="mt-1.5 text-sm text-destructive" role="alert">
                   {errors.message}
                 </p>
               )}

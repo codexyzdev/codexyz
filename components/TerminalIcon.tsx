@@ -1,10 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 export default function TerminalIcon() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    if (prefersReducedMotion()) return;
     const interval = setInterval(() => {
       setVisible((prev) => !prev);
     }, 530);

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { animate } from "animejs";
 import { safeDuration } from "@/lib/utils";
 import { ProjectItem } from "@/lib/projects";
@@ -20,6 +20,30 @@ export default function ProjectModal({
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
+  const trapFocus = useCallback((e: KeyboardEvent) => {
+    if (e.key !== "Tab" || !dialogRef.current) return;
+
+    const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }, []);
+
   useEffect(() => {
     if (!project) return;
     const prevOverflow = document.body.style.overflow;
@@ -34,16 +58,17 @@ export default function ProjectModal({
     }
     closeBtnRef.current?.focus();
 
-    function handleEsc(e: KeyboardEvent) {
+    function handleKeydown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
+      trapFocus(e);
     }
-    document.addEventListener("keydown", handleEsc);
+    document.addEventListener("keydown", handleKeydown);
 
     return () => {
-      document.removeEventListener("keydown", handleEsc);
+      document.removeEventListener("keydown", handleKeydown);
       document.body.style.overflow = prevOverflow;
     };
-  }, [project, onClose]);
+  }, [project, onClose, trapFocus]);
 
   if (!project) return null;
 
@@ -128,7 +153,7 @@ export default function ProjectModal({
         </div>
 
         {/* Content */}
-        <div className="min-h-0 overflow-y-auto overscroll-contain">
+        <div className="min-h-0 overflow-y-auto overscroll-contain cv-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr]">
             {/* Image */}
             <div className="relative bg-muted/50">

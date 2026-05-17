@@ -122,28 +122,26 @@ export default function Home() {
         onScrollToContact={scrollToContact}
       />
 
-      <main>
-        <Hero
-          lang={lang}
-          onScrollToProjects={scrollToProjects}
-          onScrollToContact={scrollToContact}
-        />
+      <Hero
+        lang={lang}
+        onScrollToProjects={scrollToProjects}
+        onScrollToContact={scrollToContact}
+      />
 
-        <About lang={lang} id="sobre-mi" />
+      <About lang={lang} id="sobre-mi" />
 
-        <Projects
-          lang={lang}
-          onOpen={(p) => {
-            analytics.projectClick(p.name)
-            setSelectedProject(p)
-          }}
-          id="proyectos"
-        />
+      <Projects
+        lang={lang}
+        onOpen={(p) => {
+          analytics.projectClick(p.name)
+          setSelectedProject(p)
+        }}
+        id="proyectos"
+      />
 
-        <Contact lang={lang} id="contacto" />
-      </main>
+      <Contact lang={lang} id="contacto" />
 
-      <Footer lang={lang} />
+      <Footer />
 
       <ProjectModal
         project={selectedProject}

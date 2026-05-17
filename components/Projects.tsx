@@ -16,7 +16,7 @@ export default function Projects({ lang, onOpen, id }: ProjectsProps) {
 
   if (projects.length === 0) {
     return (
-      <section id={id} className="section-padding">
+    <section id={id} className="section-padding cv-auto">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollReveal>
             <p className="text-sm font-medium text-primary mb-4">
@@ -38,7 +38,7 @@ export default function Projects({ lang, onOpen, id }: ProjectsProps) {
   const rest = projects.filter((p) => p.name !== featured?.name)
 
   return (
-    <section id={id} className="section-padding">
+    <section id={id} className="section-padding cv-auto">
       <div className="max-w-6xl mx-auto px-6">
         <ScrollReveal>
           <p className="text-sm font-medium text-primary mb-4">
