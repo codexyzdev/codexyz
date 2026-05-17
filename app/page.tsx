@@ -149,7 +149,6 @@ export default function Home() {
         project={selectedProject}
         lang={lang}
         onClose={() => setSelectedProject(null)}
-        onNavigate={(p) => setSelectedProject(p)}
       />
     </div>
   )

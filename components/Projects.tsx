@@ -13,6 +13,27 @@ type ProjectsProps = {
 
 export default function Projects({ lang, onOpen, id }: ProjectsProps) {
   const t = texts[lang]
+
+  if (projects.length === 0) {
+    return (
+      <section id={id} className="section-padding">
+        <div className="max-w-6xl mx-auto px-6">
+          <ScrollReveal>
+            <p className="text-sm font-medium text-primary mb-4">
+              {t.projects}
+            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
+              {t.projectsDesc}
+            </h2>
+            <p className="mt-6 text-muted-foreground">
+              {lang === "en" ? "Projects coming soon." : "Próximamente proyectos."}
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+    )
+  }
+
   const featured = projects.find((p) => p.featured) ?? projects[0]
   const rest = projects.filter((p) => p.name !== featured?.name)
 
@@ -80,53 +101,55 @@ export default function Projects({ lang, onOpen, id }: ProjectsProps) {
         )}
 
         {/* Project Grid */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rest.map((p, index) => (
-            <ScrollReveal key={p.name} delayMs={150 + index * 50}>
-              <button
-                type="button"
-                onClick={() => onOpen(p)}
-                className="w-full text-left group"
-              >
-                <div className="rounded-2xl overflow-hidden bg-card border border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full flex flex-col">
-                  <div className="relative h-48 bg-muted">
-                    <Image
-                      src={p.src}
-                      alt={p.description?.[lang] || p.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  </div>
-                  <div className="p-5 flex flex-col flex-1">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                        {p.name}
-                      </h3>
-                      {p.href && (
-                        <ExternalLink className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
+        {rest.length > 0 && (
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {rest.map((p, index) => (
+              <ScrollReveal key={p.name} delayMs={150 + index * 50}>
+                <button
+                  type="button"
+                  onClick={() => onOpen(p)}
+                  className="w-full text-left group"
+                >
+                  <div className="rounded-2xl overflow-hidden bg-card border border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full flex flex-col">
+                    <div className="relative h-48 bg-muted">
+                      <Image
+                        src={p.src}
+                        alt={p.description?.[lang] || p.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                    <div className="p-5 flex flex-col flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                          {p.name}
+                        </h3>
+                        {p.href && (
+                          <ExternalLink className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
+                        )}
+                      </div>
+                      {p.description?.[lang] && (
+                        <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                          {p.description[lang]}
+                        </p>
+                      )}
+                      {p.technologies && (
+                        <div className="mt-auto pt-4 flex flex-wrap gap-1.5">
+                          {p.technologies.slice(0, 3).map((tech) => (
+                            <span key={tech} className="badge text-[11px]">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
                       )}
                     </div>
-                    {p.description?.[lang] && (
-                      <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
-                        {p.description[lang]}
-                      </p>
-                    )}
-                    {p.technologies && (
-                      <div className="mt-auto pt-4 flex flex-wrap gap-1.5">
-                        {p.technologies.slice(0, 3).map((tech) => (
-                          <span key={tech} className="badge text-[11px]">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    )}
                   </div>
-                </div>
-              </button>
-            </ScrollReveal>
-          ))}
-        </div>
+                </button>
+              </ScrollReveal>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

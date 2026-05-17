@@ -1,36 +1,25 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { animate } from "animejs";
-import { cn, safeDuration } from "@/lib/utils";
-import { ProjectItem, projects } from "@/lib/projects";
-import { ExternalLink, ChevronLeft, ChevronRight, X } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { safeDuration } from "@/lib/utils";
+import { ProjectItem } from "@/lib/projects";
+import { ExternalLink, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type ProjectModalProps = {
   project: ProjectItem | null;
   lang: "en" | "es";
   onClose: () => void;
-  onNavigate: (project: ProjectItem) => void;
 };
 
 export default function ProjectModal({
   project,
   lang,
   onClose,
-  onNavigate,
 }: ProjectModalProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
-
-  const nav = useMemo(() => {
-    if (!project) return null;
-    const index = projects.findIndex((p) => p.name === project.name);
-    if (index === -1) return null;
-    const prev = projects[(index - 1 + projects.length) % projects.length];
-    const next = projects[(index + 1) % projects.length];
-    return { index, prev, next };
-  }, [project]);
 
   useEffect(() => {
     if (!project) return;
@@ -49,43 +38,13 @@ export default function ProjectModal({
     function handleEsc(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
     }
-    function handleArrows(e: KeyboardEvent) {
-      if (!nav) return;
-      if (e.key === "ArrowLeft") onNavigate(nav.prev);
-      if (e.key === "ArrowRight") onNavigate(nav.next);
-    }
-    function handleTab(e: KeyboardEvent) {
-      if (e.key !== "Tab" || !dialogRef.current) return;
-      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      );
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      const active = document.activeElement as HTMLElement | null;
-      if (e.shiftKey) {
-        if (active === first || !dialogRef.current.contains(active)) {
-          e.preventDefault();
-          last.focus();
-        }
-      } else {
-        if (active === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    }
     document.addEventListener("keydown", handleEsc);
-    document.addEventListener("keydown", handleArrows);
-    document.addEventListener("keydown", handleTab);
 
     return () => {
       document.removeEventListener("keydown", handleEsc);
-      document.removeEventListener("keydown", handleArrows);
-      document.removeEventListener("keydown", handleTab);
       document.body.style.overflow = prevOverflow;
     };
-  }, [project, onClose, nav, onNavigate]);
+  }, [project, onClose]);
 
   if (!project) return null;
 
@@ -102,22 +61,22 @@ export default function ProjectModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-dialog-title"
-        className="relative w-full max-w-5xl max-h-[calc(100svh-2rem)] overflow-hidden rounded-2xl border border-white/10 bg-background/75 backdrop-blur-xl shadow-2xl flex flex-col"
+        className="relative w-full max-w-4xl max-h-[calc(100svh-2rem)] overflow-hidden rounded-2xl border border-border bg-background shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
         ref={dialogRef}
       >
-        <div className="sticky top-0 z-10 flex shrink-0 items-start justify-between gap-4 border-b border-border/60 bg-background/75 backdrop-blur-xl px-4 py-4 sm:px-6">
+        <div className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-6 py-4">
           <div className="min-w-0">
             <h3
               id="project-dialog-title"
-              className="text-lg sm:text-xl font-semibold tracking-tight"
+              className="text-lg font-semibold text-foreground"
             >
               {project.name}
             </h3>
             {project.role?.[lang] && (
-              <div className="mt-1 text-sm text-muted-foreground">
-                {lang === "en" ? "Role:" : "Rol:"} {project.role[lang]}
-              </div>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {project.role[lang]}
+              </p>
             )}
           </div>
 
@@ -127,20 +86,18 @@ export default function ProjectModal({
                 href={project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "h-10 rounded-full",
-                )}
+                className="inline-flex items-center gap-2 h-9 px-4 rounded-full border border-border text-sm font-medium text-foreground hover:bg-muted transition-colors"
               >
                 {lang === "en" ? "Live" : "Ver"}
-                <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>
             )}
             <Button
               ref={closeBtnRef}
               type="button"
               variant="ghost"
-              className="h-10 w-10 rounded-full"
+              size="icon"
+              className="h-9 w-9 rounded-full"
               onClick={onClose}
               aria-label={lang === "en" ? "Close" : "Cerrar"}
             >
@@ -149,38 +106,38 @@ export default function ProjectModal({
           </div>
         </div>
 
-        <div className="min-h-0 overflow-y-auto overscroll-contain pb-[env(safe-area-inset-bottom)]">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-0">
-            <div className="relative bg-muted/40">
-              <div className="relative h-60 sm:h-[340px] lg:h-[520px]">
+        <div className="min-h-0 overflow-y-auto overscroll-contain">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="relative bg-muted">
+              <div className="relative h-64 sm:h-80 lg:h-[480px]">
                 <Image
                   src={project.src}
                   alt={project.description?.[lang] || project.name}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 65vw"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
                   className="object-cover"
                   priority
                 />
               </div>
             </div>
 
-            <div className="px-4 py-5 sm:px-6">
+            <div className="p-6">
               {project.description?.[lang] && (
-                <p className="text-sm sm:text-base text-foreground/90">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {project.description[lang]}
                 </p>
               )}
 
               {!!project.technologies?.length && (
-                <div className="mt-5">
-                  <div className="text-xs font-medium text-muted-foreground">
+                <div className="mt-6">
+                  <h4 className="text-xs font-medium text-muted-foreground mb-2">
                     {lang === "en" ? "Tech" : "Tecnologías"}
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="inline-flex items-center rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground ring-1 ring-border/60"
+                        className="badge text-[11px]"
                       >
                         {tech}
                       </span>
@@ -190,47 +147,21 @@ export default function ProjectModal({
               )}
 
               {!!project.highlights?.[lang]?.length && (
-                <div className="mt-5">
-                  <div className="text-xs font-medium text-muted-foreground">
+                <div className="mt-6">
+                  <h4 className="text-xs font-medium text-muted-foreground mb-2">
                     {lang === "en" ? "Highlights" : "Puntos clave"}
-                  </div>
-                  <ul className="mt-2 space-y-2">
+                  </h4>
+                  <ul className="space-y-2">
                     {project.highlights[lang].map((item) => (
                       <li
                         key={item}
                         className="flex gap-2 text-sm text-muted-foreground"
                       >
-                        <span
-                          className="mt-2 h-1.5 w-1.5 rounded-full bg-primary"
-                          aria-hidden="true"
-                        />
+                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-              )}
-
-              {nav && (
-                <div className="mt-6 flex items-center justify-between gap-2">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="h-10 rounded-full"
-                    onClick={() => onNavigate(nav.prev)}
-                  >
-                    <ChevronLeft className="mr-2 h-4 w-4" />
-                    {lang === "en" ? "Prev" : "Anterior"}
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="h-10 rounded-full"
-                    onClick={() => onNavigate(nav.next)}
-                  >
-                    {lang === "en" ? "Next" : "Siguiente"}
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
                 </div>
               )}
             </div>
