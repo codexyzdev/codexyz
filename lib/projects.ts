@@ -24,7 +24,7 @@ export const projects: ProjectItem[] = [
   {
     name: "Finanzas Pro",
     src: "/finanzas-pro-desktop.png",
-    srcMobile: "/finanzas-pro-mobile.png",
+    // srcMobile: "/finanzas-pro-mobile.png",
     href: "https://finanzas-pro-by-codexyzdev.vercel.app/",
     year: 2025,
     description: {
@@ -61,7 +61,7 @@ export const projects: ProjectItem[] = [
   {
     name: "Los Tiburones",
     src: "/los-tiburones-desktop.png",
-    srcMobile: "/los-tiburones-mobile.png",
+    // srcMobile: "/los-tiburones-mobile.png",
     href: "https://los-tiburones-store.vercel.app/",
     year: 2024,
     description: {
