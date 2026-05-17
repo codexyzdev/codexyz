@@ -102,8 +102,7 @@ export const projects: ProjectItem[] = [
   },
   {
     name: "Chess Clock",
-    src: "/chess-clock-desktop.png",
-    srcMobile: "/chess-clock-mobile.png",
+    src: "/chess-clock-mobile.png",
     href: "https://chess-clock-by-codexyzdev.vercel.app/",
     year: 2024,
     description: {
