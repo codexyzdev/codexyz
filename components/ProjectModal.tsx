@@ -4,8 +4,7 @@ import { useEffect, useRef } from "react";
 import { animate } from "animejs";
 import { safeDuration } from "@/lib/utils";
 import { ProjectItem } from "@/lib/projects";
-import { ExternalLink, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ExternalLink, X, Calendar, Briefcase } from "lucide-react";
 
 type ProjectModalProps = {
   project: ProjectItem | null;
@@ -49,11 +48,11 @@ export default function ProjectModal({
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6">
       <button
         type="button"
         aria-label={lang === "en" ? "Close" : "Cerrar"}
-        className="absolute inset-0 bg-black/60"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
 
@@ -61,95 +60,106 @@ export default function ProjectModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-dialog-title"
-        className="relative w-full max-w-4xl max-h-[calc(100svh-2rem)] overflow-hidden rounded-2xl border border-border bg-background shadow-2xl flex flex-col"
+        className="relative w-full max-w-5xl max-h-[calc(100svh-2rem)] overflow-hidden rounded-3xl border border-border bg-background shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
         ref={dialogRef}
       >
-        <div className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-6 py-4">
-          <div className="min-w-0">
+        {/* Header */}
+        <div className="flex shrink-0 items-center justify-between gap-4 px-6 py-5 border-b border-border">
+          <div className="min-w-0 flex-1">
             <h3
               id="project-dialog-title"
-              className="text-lg font-semibold text-foreground"
+              className="text-xl font-semibold text-foreground"
             >
               {project.name}
             </h3>
-            {project.role?.[lang] && (
-              <p className="mt-1 text-sm text-muted-foreground">
-                {project.role[lang]}
-              </p>
-            )}
+            <div className="flex items-center gap-3 mt-2 text-sm text-muted-foreground">
+              {project.role?.[lang] && (
+                <span className="inline-flex items-center gap-1.5">
+                  <Briefcase className="h-3.5 w-3.5" />
+                  {project.role[lang]}
+                </span>
+              )}
+              {project.year && (
+                <span className="inline-flex items-center gap-1.5">
+                  <Calendar className="h-3.5 w-3.5" />
+                  {project.year}
+                </span>
+              )}
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {project.href && (
               <a
                 href={project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-9 px-4 rounded-full border border-border text-sm font-medium text-foreground hover:bg-muted transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
               >
-                {lang === "en" ? "Live" : "Ver"}
+                {lang === "en" ? "View Live" : "Ver en vivo"}
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>
             )}
-            <Button
+            <button
               ref={closeBtnRef}
               type="button"
-              variant="ghost"
-              size="icon"
-              className="h-9 w-9 rounded-full"
+              className="inline-flex items-center justify-center h-10 w-10 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               onClick={onClose}
               aria-label={lang === "en" ? "Close" : "Cerrar"}
             >
-              <X className="h-4 w-4" />
-            </Button>
+              <X className="h-5 w-5" />
+            </button>
           </div>
         </div>
 
+        {/* Content */}
         <div className="min-h-0 overflow-y-auto overscroll-contain">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="relative bg-muted">
-              <div className="relative h-64 sm:h-80 lg:h-[480px]">
-                {/* Mobile image */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr]">
+            {/* Image */}
+            <div className="relative bg-muted/50">
+              <div className="relative h-64 sm:h-80 lg:h-[500px]">
                 {project.srcMobile && (
                   <Image
                     src={project.srcMobile}
                     alt={project.description?.[lang] || project.name}
                     fill
-                    className="object-contain sm:hidden"
+                    className="object-contain p-4 sm:hidden"
                     sizes="100vw"
                     priority
                   />
                 )}
-                {/* Desktop image */}
                 <Image
                   src={project.src}
                   alt={project.description?.[lang] || project.name}
                   fill
-                  className={`object-contain ${project.srcMobile ? 'hidden sm:block' : ''}`}
+                  className={`object-contain p-4 ${project.srcMobile ? 'hidden sm:block' : ''}`}
                   sizes="(max-width: 1024px) 100vw, 60vw"
                   priority
                 />
               </div>
             </div>
 
-            <div className="p-6">
+            {/* Details */}
+            <div className="p-6 sm:p-8 space-y-6">
+              {/* Description */}
               {project.description?.[lang] && (
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-base text-muted-foreground leading-relaxed">
                   {project.description[lang]}
                 </p>
               )}
 
+              {/* Technologies */}
               {!!project.technologies?.length && (
-                <div className="mt-6">
-                  <h4 className="text-xs font-medium text-muted-foreground mb-2">
-                    {lang === "en" ? "Tech" : "Tecnologías"}
+                <div>
+                  <h4 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-3">
+                    {lang === "en" ? "Technologies" : "Tecnologías"}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="badge text-[11px]"
+                        className="inline-flex items-center px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium"
                       >
                         {tech}
                       </span>
@@ -158,19 +168,20 @@ export default function ProjectModal({
                 </div>
               )}
 
+              {/* Highlights */}
               {!!project.highlights?.[lang]?.length && (
-                <div className="mt-6">
-                  <h4 className="text-xs font-medium text-muted-foreground mb-2">
-                    {lang === "en" ? "Highlights" : "Puntos clave"}
+                <div>
+                  <h4 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-3">
+                    {lang === "en" ? "Key Features" : "Funcionalidades clave"}
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2.5">
                     {project.highlights[lang].map((item) => (
                       <li
                         key={item}
-                        className="flex gap-2 text-sm text-muted-foreground"
+                        className="flex gap-3 text-sm text-muted-foreground"
                       >
                         <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
-                        <span>{item}</span>
+                        <span className="leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>
