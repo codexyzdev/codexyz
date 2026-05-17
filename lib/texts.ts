@@ -10,19 +10,19 @@ export const texts = {
     seeProjects: "See my work",
     aboutMe: "About me",
     aboutDesc:
-      "I help businesses and entrepreneurs make the digital leap with modern web applications.",
+      "I build custom web applications that help businesses and entrepreneurs scale.",
     aboutDetail:
-      "I turn your vision into digital reality: functional platforms, secure and optimized for the best customer experience. I handle the structure and code so you can focus on growing your business.",
+      "I turn your vision into digital products: robust, secure platforms designed to deliver the best user experience. I handle the technology and development so you can focus on growing your business.",
     projects: "Projects",
-    projectsDesc: "apps, sites, and experiments.",
+    projectsDesc: "Web apps, custom platforms, and technical experiments.",
     contact: "Contact",
     contactDesc:
       "Send me a message and I'll get back to you as soon as possible.",
-    contactSub: "Let's talk about your project.",
+    contactSub: "Let's build something great together.",
     name: "Name",
     email: "Email",
     message: "Message",
-    sendGmail: "Open email draft",
+    sendGmail: "Send an email",
     langToggle: "ES / EN",
     // Form validation
     required: "This field is required",
@@ -47,19 +47,19 @@ export const texts = {
     seeProjects: "Ver mi trabajo",
     aboutMe: "Sobre mí",
     aboutDesc:
-      "Ayudo a empresas y emprendedores a dar el salto digital con aplicaciones web modernas.",
+      "Desarrollo aplicaciones web a medida que ayudan a empresas y emprendedores a escalar su negocio.",
     aboutDetail:
-      "Convierto tu visión en una realidad digital: plataformas funcionales, seguras y optimizadas para la mejor experiencia de tus clientes. Me encargo de la estructura y el código para que te concentres en hacer crecer tu negocio.",
+      "Transformo tus ideas en productos digitales: plataformas robustas, seguras y diseñadas para ofrecer la mejor experiencia a tus usuarios. Yo me encargo de la tecnología y el desarrollo para que te enfoques en hacer crecer tu negocio.",
     projects: "Proyectos",
-    projectsDesc: "apps, sitios y experimentos.",
+    projectsDesc: "Aplicaciones web, plataformas a medida y desarrollo experimental.",
     contact: "Contacto",
     contactDesc:
       "Envíame un mensaje y te respondo lo antes posible.",
-    contactSub: "Hablemos de tu proyecto.",
+    contactSub: "Construyamos algo genial juntos.",
     name: "Nombre",
     email: "Email",
     message: "Mensaje",
-    sendGmail: "Abrir borrador",
+    sendGmail: "Enviar correo directo",
     langToggle: "ES / EN",
     // Form validation
     required: "Este campo es obligatorio",
