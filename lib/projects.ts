@@ -58,4 +58,45 @@ export const projects: ProjectItem[] = [
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase", "Firestore", "Vercel"],
     featured: true
   },
+  {
+    name: "Los Tiburones",
+    src: "/los-tiburones-desktop.png",
+    srcMobile: "/los-tiburones-mobile.png",
+    year: 2024,
+    description: {
+      en: "Full-stack financial management system for credit stores with multi-tenant architecture. Each store operates with completely isolated data.",
+      es: "Sistema full-stack de gestión financiera para tiendas de crédito con arquitectura multi-tenant. Cada tienda opera con datos completamente aislados."
+    },
+    role: {
+      en: "Full-stack development",
+      es: "Desarrollo full-stack"
+    },
+    highlights: {
+      en: [
+        "Authentication with roles (admin/seller) and granular module permissions",
+        "Financing system with automatic fee calculation and sequential payment application",
+        "Collections with payment validation (cash, POS, mobile, Zelle) and risk classification",
+        "Cash sales with step-by-step process, dynamic cart and PDF invoice generation",
+        "Client management with ID validation, Google Maps geolocation and ID upload",
+        "Inventory with stock control, entry/exit movements and PDF reports",
+        "PDF generation (contracts, payment plans, invoices) using React-PDF",
+        "WhatsApp integration for payment reminders and contracts",
+        "Real-time dashboard with metrics and collection statistics",
+        "Cloud Functions for processing overdue payments with scheduled tasks (cron)",
+      ],
+      es: [
+        "Autenticación con roles (admin/vendedor) y permisos granulares por módulo",
+        "Sistema de financiamiento con cálculo automático de cuotas y aplicación secuencial de pagos",
+        "Cobranza con validación de pagos (efectivo, punto de venta, pago móvil, Zelle) y clasificación de riesgo",
+        "Ventas al contado con proceso paso a paso, carrito dinámico y generación de facturas PDF",
+        "Gestión de clientes con validación de cédula, geolocalización con Google Maps",
+        "Inventario con control de stock, movimientos de entrada/salida y reportes PDF",
+        "Generación de PDFs (contratos, planes de pago, facturas) usando React-PDF",
+        "Integración con WhatsApp para recordatorios de cuotas y comprobantes de pago",
+        "Dashboard con métricas en tiempo real y estadísticas de cobranza",
+        "Cloud Functions para procesamiento de cuotas atrasadas con tareas programadas",
+      ]
+    },
+    technologies: ["Next.js", "TypeScript", "Firebase", "Redux Toolkit", "Tailwind CSS", "Radix UI", "Vercel"],
+  },
 ]
