@@ -148,29 +148,35 @@ export const projects: ProjectItem[] = [
     href: "https://ahorro-compartido-2026.vercel.app/",
     year: 2025,
     description: {
-      en: "Couples savings challenge app with dashboard, envelope board, and progress tracking. Reach your 2026 goals together.",
-      es: "App de reto de ahorro para parejas con tablero de sobres y seguimiento de progreso. Alcanza tus metas de 2026 juntos."
+      en: "Fullstack web app for couples to follow the '100 Envelopes Challenge', accumulating $5,050 in a year with modern design, fluid animations and cloud sync.",
+      es: "Aplicación web fullstack para que parejas sigan juntas el 'Reto de los 100 Sobres', acumulando $5,050 en un año con diseño moderno, animaciones fluidas y sincronización en la nube."
     },
     role: {
-      en: "Product + UI development",
-      es: "Producto + desarrollo UI"
+      en: "Full-stack development",
+      es: "Desarrollo full-stack"
     },
     highlights: {
       en: [
-        "Savings dashboard with total progress and remaining days counter",
-        "100 envelope board with individual amounts from $1 to $100",
-        "Real-time progress tracking with visual indicators",
-        "Partner connection feature for shared savings",
-        "Clean, intuitive UI with mobile-first design",
+        "Smart deposit system that automatically distributes money across empty or partial envelopes",
+        "Visual grid of 100 envelopes with responsive layout (5/8/10 columns) and celebration animations",
+        "Particle effects system flying from input to affected envelopes with Framer Motion transitions",
+        "Statistics panel with average per envelope, pending amount, efficiency percentage and remaining days",
+        "Transaction history timeline grouping deposits by month with amounts and affected envelopes",
+        "Couple customization with names and challenge purpose",
+        "Google OAuth 2.0 with NextAuth.js v5 and Google Drive as backend for cloud sync",
+        "Dual persistence: localStorage for offline + Google Drive for cross-device access",
       ],
       es: [
-        "Dashboard de ahorro con progreso total y contador de días restantes",
-        "Tablero de 100 sobres con montos individuales de $1 a $100",
-        "Seguimiento de progreso en tiempo real con indicadores visuales",
-        "Función de conexión con pareja para ahorro compartido",
-        "UI limpia e intuitiva con diseño mobile-first",
+        "Sistema de depósito inteligente que distribuye automáticamente el dinero en sobres vacíos o parciales",
+        "Cuadrícula visual de 100 sobres con layout responsivo y animaciones de celebración",
+        "Sistema de partículas que vuelan desde el input hacia los sobres afectados con Framer Motion",
+        "Panel de estadísticas con promedio por sobre, monto pendiente, eficiencia y días restantes",
+        "Historial de transiciones agrupando depósitos por mes con montos y sobres afectados",
+        "Personalización de pareja con nombres y propósito del reto",
+        "Google OAuth 2.0 con NextAuth.js v5 y Google Drive como backend para sincronización en la nube",
+        "Doble persistencia: localStorage para offline + Google Drive para acceso desde cualquier dispositivo",
       ]
     },
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "NextAuth.js", "Google Drive API", "Vercel"],
   },
 ]
