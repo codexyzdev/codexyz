@@ -25,7 +25,7 @@ export const projects: ProjectItem[] = [
     name: "Finanzas Pro",
     src: "/finanzas-pro-desktop.png",
     srcMobile: "/finanzas-pro-mobile.png",
-    href: "https://finanzas-pro.vercel.app",
+    href: "https://finanzas-pro-by-codexyzdev.vercel.app/",
     year: 2025,
     description: {
       en: "Complete personal finance management app with aesthetic minimalist banking, designed for users in Latin America (USD, VES, COP). Deployed on Vercel.",
@@ -62,6 +62,7 @@ export const projects: ProjectItem[] = [
     name: "Los Tiburones",
     src: "/los-tiburones-desktop.png",
     srcMobile: "/los-tiburones-mobile.png",
+    href: "https://los-tiburones-store.vercel.app/",
     year: 2024,
     description: {
       en: "Full-stack financial management system for credit stores with multi-tenant architecture. Each store operates with completely isolated data.",
@@ -98,5 +99,47 @@ export const projects: ProjectItem[] = [
       ]
     },
     technologies: ["Next.js", "TypeScript", "Firebase", "Redux Toolkit", "Tailwind CSS", "Radix UI", "Vercel"],
+  },
+  {
+    name: "Chess Clock",
+    src: "/chess-clock-desktop.png",
+    srcMobile: "/chess-clock-mobile.png",
+    href: "https://chess-clock-by-codexyzdev.vercel.app/",
+    year: 2024,
+    description: {
+      en: "Two-player chess clock PWA with touch interface, offline mode, and complete end-to-end design. Players sit face-to-face with inverted panels.",
+      es: "Reloj de ajedrez PWA para dos jugadores con interfaz táctil, modo offline y diseño completo de extremo a extremo. Jugadores sentados frente a frente con paneles invertidos."
+    },
+    role: {
+      en: "Full-stack development",
+      es: "Desarrollo full-stack"
+    },
+    highlights: {
+      en: [
+        "High-precision timer with requestAnimationFrame and epoch calculation (Date.now())",
+        "Turn change with synthesized audio feedback (triangular wave, no audio dependencies)",
+        "Game state machine: initial → running → paused → finished with clean transitions",
+        "Win conditions: time out (flag), resignation, draw, or restart",
+        "Custom names and preset time controls (1, 3, 5, 10, 15, 30 min)",
+        "Persistent game history with timestamps, names, time control and result",
+        "Complete i18n in English and Spanish with pluralization and template interpolation",
+        "PWA offline-first with custom service worker, MD5 hash cache busting and real-time update flow",
+        "Dual persistence (localStorage synchronous + IndexedDB asynchronous) for offline data resilience",
+        "Synthesized audio with Web Audio API (oscillator + gain envelope), eliminating sound files from bundle",
+      ],
+      es: [
+        "Temporizador de alta precisión con requestAnimationFrame y cálculo por época (Date.now())",
+        "Cambio de turno con feedback sonoro sintetizado en tiempo real (onda triangular, sin dependencias de audio)",
+        "Máquina de estados del juego: inicial → corriendo → pausado → finalizado, con transiciones limpias",
+        "Condiciones de victoria: tiempo agotado (flag), rendición, tablas o reinicio",
+        "Nombres personalizados y controles de tiempo preestablecidos (1, 3, 5, 10, 15, 30 min)",
+        "Historial de partidas persistente con timestamps, nombres, control de tiempo y resultado",
+        "Internacionalización (i18n) completa en inglés y español, con pluralización e interpolación de plantillas",
+        "PWA offline-first con service worker custom generado en build time y flujo de actualización en tiempo real",
+        "Persistencia dual (localStorage síncrono + IndexedDB asíncrono) para resiliencia ante datos offline",
+        "Audio sintetizado con Web Audio API (oscillator + gain envelope), eliminando archivos de sonido del bundle",
+      ]
+    },
+    technologies: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "PWA", "Web Audio API", "IndexedDB", "Vercel"],
   },
 ]
