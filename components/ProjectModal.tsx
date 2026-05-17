@@ -110,12 +110,24 @@ export default function ProjectModal({
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="relative bg-muted">
               <div className="relative h-64 sm:h-80 lg:h-[480px]">
+                {/* Mobile image */}
+                {project.srcMobile && (
+                  <Image
+                    src={project.srcMobile}
+                    alt={project.description?.[lang] || project.name}
+                    fill
+                    className="object-contain sm:hidden"
+                    sizes="100vw"
+                    priority
+                  />
+                )}
+                {/* Desktop image */}
                 <Image
                   src={project.src}
                   alt={project.description?.[lang] || project.name}
                   fill
+                  className={`object-contain ${project.srcMobile ? 'hidden sm:block' : ''}`}
                   sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="object-cover"
                   priority
                 />
               </div>

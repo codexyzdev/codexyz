@@ -1,6 +1,7 @@
 export type ProjectItem = {
   name: string
   src: string
+  srcMobile?: string
   href?: string
   year?: number
   description?: {
@@ -22,7 +23,8 @@ export type ProjectItem = {
 export const projects: ProjectItem[] = [
   {
     name: "Finanzas Pro",
-    src: "/finanzas-pro.png",
+    src: "/finanzas-pro-desktop.png",
+    srcMobile: "/finanzas-pro-mobile.png",
     href: "https://finanzas-pro.vercel.app",
     year: 2025,
     description: {

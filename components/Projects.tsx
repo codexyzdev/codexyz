@@ -60,11 +60,23 @@ export default function Projects({ lang, onOpen, id }: ProjectsProps) {
               <div className="rounded-2xl overflow-hidden bg-card border border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 {/* Image */}
                 <div className="relative w-full aspect-[16/10] bg-muted overflow-hidden">
+                  {/* Mobile image */}
+                  {featured.srcMobile && (
+                    <Image
+                      src={featured.srcMobile}
+                      alt={featured.description?.[lang] || featured.name}
+                      fill
+                      className="object-contain transition-transform duration-500 group-hover:scale-105 sm:hidden"
+                      sizes="100vw"
+                      priority
+                    />
+                  )}
+                  {/* Desktop image */}
                   <Image
                     src={featured.src}
                     alt={featured.description?.[lang] || featured.name}
                     fill
-                    className="object-contain transition-transform duration-500 group-hover:scale-105"
+                    className={`object-contain transition-transform duration-500 group-hover:scale-105 ${featured.srcMobile ? 'hidden sm:block' : ''}`}
                     sizes="(max-width: 768px) 100vw, 768px"
                     priority
                   />
